@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="$Version: $ tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro $">
+ <title>Directory Tree</title>
+ <style type="text/css">
+  <!-- 
+  BODY { font-family : ariel, monospace, sans-serif; }
+  P { font-weight: normal; font-family : ariel, monospace, sans-serif; color: black; background-color: transparent;}
+  B { font-weight: normal; color: black; background-color: transparent;}
+  A:visited { font-weight : normal; text-decoration : none; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  A:link    { font-weight : normal; text-decoration : none; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  A:hover   { color : #000000; font-weight : normal; text-decoration : underline; background-color : yellow; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  A:active  { color : #000000; font-weight: normal; background-color : transparent; margin : 0px 0px 0px 0px; padding : 0px 0px 0px 0px; display: inline; }
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  background-color: transparent;}
+  .FIFO  { color: purple; background-color: transparent;}
+  .CHAR  { color: yellow; background-color: transparent;}
+  .DIR   { color: blue;   background-color: transparent;}
+  .BLOCK { color: yellow; background-color: transparent;}
+  .LINK  { color: aqua;   background-color: transparent;}
+  .SOCK  { color: fuchsia;background-color: transparent;}
+  .EXEC  { color: green;  background-color: transparent;}
+  -->
+ </style>
+</head>
+<body>
+	<h1>Directory Tree</h1><p>
+	<a class="NORM" href=".">.</a><br>
+	├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./data/">data</a><br>
+	│   ├── [2.3M]&nbsp;&nbsp;<a class="NORM" href="./data/big_cars.csv">big_cars.csv</a><br>
+	│   ├── [745K]&nbsp;&nbsp;<a class="NORM" href="./data/fam_cars.csv">fam_cars.csv</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./data/.ipynb_checkpoints/">.ipynb_checkpoints</a><br>
+	│   │   └── [2.3M]&nbsp;&nbsp;<a class="NORM" href="./data/.ipynb_checkpoints/used_cars-checkpoint.csv">used_cars-checkpoint.csv</a><br>
+	│   ├── [2.3M]&nbsp;&nbsp;<a class="NORM" href="./data/km0_cars.csv">km0_cars.csv</a><br>
+	│   ├── [2.3M]&nbsp;&nbsp;<a class="NORM" href="./data/medium_cars.csv">medium_cars.csv</a><br>
+	│   ├── [2.0M]&nbsp;&nbsp;<a class="NORM" href="./data/minivan_cars.csv">minivan_cars.csv</a><br>
+	│   ├── [2.4M]&nbsp;&nbsp;<a class="NORM" href="./data/offroad_cars.csv">offroad_cars.csv</a><br>
+	│   ├── [526K]&nbsp;&nbsp;<a class="NORM" href="./data/renting_cars.csv">renting_cars.csv</a><br>
+	│   ├── [625K]&nbsp;&nbsp;<a class="NORM" href="./data/small_cars.csv">small_cars.csv</a><br>
+	│   ├── [1.3M]&nbsp;&nbsp;<a class="NORM" href="./data/sports_cars.csv">sports_cars.csv</a><br>
+	│   ├── [2.3M]&nbsp;&nbsp;<a class="NORM" href="./data/used_cars.csv">used_cars.csv</a><br>
+	│   └── [1.3M]&nbsp;&nbsp;<a class="NORM" href="./data/van_cars.csv">van_cars.csv</a><br>
+	├── [4.5K]&nbsp;&nbsp;<a class="NORM" href="./env-config.yml">env-config.yml</a><br>
+	├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/">.git</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/branches/">branches</a><br>
+	│   ├── [&nbsp;&nbsp;17]&nbsp;&nbsp;<a class="NORM" href="./.git/COMMIT_EDITMSG">COMMIT_EDITMSG</a><br>
+	│   ├── [&nbsp;267]&nbsp;&nbsp;<a class="NORM" href="./.git/config">config</a><br>
+	│   ├── [&nbsp;&nbsp;73]&nbsp;&nbsp;<a class="NORM" href="./.git/description">description</a><br>
+	│   ├── [&nbsp;&nbsp;21]&nbsp;&nbsp;<a class="NORM" href="./.git/HEAD">HEAD</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/hooks/">hooks</a><br>
+	│   │   ├── [&nbsp;478]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/applypatch-msg.sample">applypatch-msg.sample</a><br>
+	│   │   ├── [&nbsp;896]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/commit-msg.sample">commit-msg.sample</a><br>
+	│   │   ├── [3.2K]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/fsmonitor-watchman.sample">fsmonitor-watchman.sample</a><br>
+	│   │   ├── [&nbsp;189]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/post-update.sample">post-update.sample</a><br>
+	│   │   ├── [&nbsp;424]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/pre-applypatch.sample">pre-applypatch.sample</a><br>
+	│   │   ├── [1.6K]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/pre-commit.sample">pre-commit.sample</a><br>
+	│   │   ├── [1.5K]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/prepare-commit-msg.sample">prepare-commit-msg.sample</a><br>
+	│   │   ├── [1.3K]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/pre-push.sample">pre-push.sample</a><br>
+	│   │   ├── [4.8K]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/pre-rebase.sample">pre-rebase.sample</a><br>
+	│   │   ├── [&nbsp;544]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/pre-receive.sample">pre-receive.sample</a><br>
+	│   │   └── [3.5K]&nbsp;&nbsp;<a class="EXEC" href="./.git/hooks/update.sample">update.sample</a><br>
+	│   ├── [3.5K]&nbsp;&nbsp;<a class="NORM" href="./.git/index">index</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/info/">info</a><br>
+	│   │   └── [&nbsp;240]&nbsp;&nbsp;<a class="NORM" href="./.git/info/exclude">exclude</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/logs/">logs</a><br>
+	│   │   ├── [&nbsp;508]&nbsp;&nbsp;<a class="NORM" href="./.git/logs/HEAD">HEAD</a><br>
+	│   │   └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/logs/refs/">refs</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/logs/refs/heads/">heads</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; │   └── [&nbsp;508]&nbsp;&nbsp;<a class="NORM" href="./.git/logs/refs/heads/main">main</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/logs/refs/remotes/">remotes</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/logs/refs/remotes/origin/">origin</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── [&nbsp;192]&nbsp;&nbsp;<a class="NORM" href="./.git/logs/refs/remotes/origin/HEAD">HEAD</a><br>
+	│   │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── [&nbsp;296]&nbsp;&nbsp;<a class="NORM" href="./.git/logs/refs/remotes/origin/main">main</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/">objects</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/00/">00</a><br>
+	│   │   │   └── [&nbsp;895]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/00/1de68eb742568773040c9c40526945512b3288">1de68eb742568773040c9c40526945512b3288</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/06/">06</a><br>
+	│   │   │   ├── [&nbsp;14K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/06/2115858f1256cdc1795e596a094af9ed06a4bf">2115858f1256cdc1795e596a094af9ed06a4bf</a><br>
+	│   │   │   └── [&nbsp;218]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/06/ae8976b6c79902db790e99aa8e283605fab4d5">ae8976b6c79902db790e99aa8e283605fab4d5</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/0b/">0b</a><br>
+	│   │   │   └── [&nbsp;191]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/0b/755cd8aa9aa08b20675ec4519cc446719711c0">755cd8aa9aa08b20675ec4519cc446719711c0</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/0d/">0d</a><br>
+	│   │   │   └── [&nbsp;439]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/0d/44c6e47a29c15054ccd3d56bbc2a4b3d4bfbb9">44c6e47a29c15054ccd3d56bbc2a4b3d4bfbb9</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/14/">14</a><br>
+	│   │   │   └── [&nbsp;105]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/14/08c7f869bdcb4c0db5b6900422c199166fb7d2">08c7f869bdcb4c0db5b6900422c199166fb7d2</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/15/">15</a><br>
+	│   │   │   └── [&nbsp;&nbsp;69]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/15/a630d9c19feb833c483220b4beb948ea1ce032">a630d9c19feb833c483220b4beb948ea1ce032</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/1b/">1b</a><br>
+	│   │   │   └── [&nbsp;14K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/1b/8f6413157b5ed6b2acdc1c6543304ea970f5e6">8f6413157b5ed6b2acdc1c6543304ea970f5e6</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/20/">20</a><br>
+	│   │   │   └── [561K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/20/34cab1c146ff671ee657d1ec1b073be445a5c7">34cab1c146ff671ee657d1ec1b073be445a5c7</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/22/">22</a><br>
+	│   │   │   └── [&nbsp;190]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/22/7d47bb7a428ffd4af21a8907284e32d2da403e">7d47bb7a428ffd4af21a8907284e32d2da403e</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/24/">24</a><br>
+	│   │   │   └── [2.5K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/24/4f100635a5f93678a2494a95c8d4b8102519b1">4f100635a5f93678a2494a95c8d4b8102519b1</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/28/">28</a><br>
+	│   │   │   ├── [&nbsp;&nbsp;70]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/28/6a71b388577ffeb63065f35e025203bb509bad">6a71b388577ffeb63065f35e025203bb509bad</a><br>
+	│   │   │   └── [3.6K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/28/b726bb4cf404cca7ed1436ef7c81f85e5655b1">b726bb4cf404cca7ed1436ef7c81f85e5655b1</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/2c/">2c</a><br>
+	│   │   │   └── [577K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/2c/f11b1085d2e8878585c156b53536760ef4bb2b">f11b1085d2e8878585c156b53536760ef4bb2b</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/30/">30</a><br>
+	│   │   │   └── [674K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/30/bf1c2a03d3a1ce140bcc3ad76a3cd9205ad1e2">bf1c2a03d3a1ce140bcc3ad76a3cd9205ad1e2</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/37/">37</a><br>
+	│   │   │   └── [&nbsp;142]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/37/a162e01e7d680528659a5f62c0a7fd8b5d1bd8">a162e01e7d680528659a5f62c0a7fd8b5d1bd8</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/38/">38</a><br>
+	│   │   │   └── [&nbsp;352]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/38/3bdc45a4fd276945ad6295a67ae4c7d411fa9b">3bdc45a4fd276945ad6295a67ae4c7d411fa9b</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/3e/">3e</a><br>
+	│   │   │   ├── [&nbsp;&nbsp;69]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/3e/37f4a1529bae9ce7166b3ead8a2690858202b6">37f4a1529bae9ce7166b3ead8a2690858202b6</a><br>
+	│   │   │   └── [&nbsp;113]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/3e/a551b487fddf20f0ed98d225f956735aba321f">a551b487fddf20f0ed98d225f956735aba321f</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/41/">41</a><br>
+	│   │   │   └── [&nbsp;317]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/41/62194a46be4cd42e1868caa8fd153d4b7dc4c4">62194a46be4cd42e1868caa8fd153d4b7dc4c4</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/42/">42</a><br>
+	│   │   │   └── [&nbsp;440]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/42/764c12194314f8693b85e7c4f95f631df16275">764c12194314f8693b85e7c4f95f631df16275</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/46/">46</a><br>
+	│   │   │   └── [&nbsp;156]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/46/0a5feb601c4a0f7c8864c71f2e4332f8ff18ed">0a5feb601c4a0f7c8864c71f2e4332f8ff18ed</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/48/">48</a><br>
+	│   │   │   └── [101K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/48/658f1e43a2a83cb3ca8037600dbef95b8adc69">658f1e43a2a83cb3ca8037600dbef95b8adc69</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/49/">49</a><br>
+	│   │   │   └── [&nbsp;269]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/49/31e721fd9560fdefdc388c929e874db3cdb0f9">31e721fd9560fdefdc388c929e874db3cdb0f9</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/4b/">4b</a><br>
+	│   │   │   └── [3.6K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/4b/bc9dc0d655f8c83b048f06a001810fe990dafe">bc9dc0d655f8c83b048f06a001810fe990dafe</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/4f/">4f</a><br>
+	│   │   │   └── [2.5K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/4f/2c0ef621bdfef1e90f73bf9499d5f8ede12ff9">2c0ef621bdfef1e90f73bf9499d5f8ede12ff9</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/52/">52</a><br>
+	│   │   │   └── [343K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/52/1043546f5c7865ed131cf3f68801714da9f233">1043546f5c7865ed131cf3f68801714da9f233</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/53/">53</a><br>
+	│   │   │   └── [&nbsp;&nbsp;60]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/53/c12155c218afec3d0fbd2c3d962036c2934b00">c12155c218afec3d0fbd2c3d962036c2934b00</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/54/">54</a><br>
+	│   │   │   └── [&nbsp;13K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/54/3a0a67c773587059fb0d0b0213bfcb74f48af5">3a0a67c773587059fb0d0b0213bfcb74f48af5</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/5b/">5b</a><br>
+	│   │   │   ├── [&nbsp;176]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/5b/b7dc56192c2cd96bd8d74d734927fb4a50de4e">b7dc56192c2cd96bd8d74d734927fb4a50de4e</a><br>
+	│   │   │   └── [&nbsp;139]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/5b/e615add3c327f2fdb2d9947d215e7bb68665e0">e615add3c327f2fdb2d9947d215e7bb68665e0</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/5c/">5c</a><br>
+	│   │   │   └── [113K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/5c/b55d6065b42ab0ea34fedf207e17b956b2aff3">b55d6065b42ab0ea34fedf207e17b956b2aff3</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/60/">60</a><br>
+	│   │   │   └── [175K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/60/c370907c101ea21a918da891ca7870ec6a2464">c370907c101ea21a918da891ca7870ec6a2464</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/64/">64</a><br>
+	│   │   │   └── [&nbsp;105]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/64/272c05cfe7e815580a9f75a98c5372c79f3a38">272c05cfe7e815580a9f75a98c5372c79f3a38</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/66/">66</a><br>
+	│   │   │   └── [&nbsp;164]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/66/693164fcbc5789580096c7425c5e4c0b2239cd">693164fcbc5789580096c7425c5e4c0b2239cd</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/68/">68</a><br>
+	│   │   │   └── [1.9K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/68/025dbc898e313d6236694d619451ceeb71f04a">025dbc898e313d6236694d619451ceeb71f04a</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/6a/">6a</a><br>
+	│   │   │   └── [&nbsp;&nbsp;67]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/6a/d6ade96a365493233ef4bbf9e521a407bf4657">d6ade96a365493233ef4bbf9e521a407bf4657</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/73/">73</a><br>
+	│   │   │   └── [&nbsp;163]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/73/711357448bf27d89dae2d367a410ba78851733">711357448bf27d89dae2d367a410ba78851733</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/78/">78</a><br>
+	│   │   │   └── [&nbsp;44K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/78/f1556e180666b783ebe8d148c3a7288473b17d">f1556e180666b783ebe8d148c3a7288473b17d</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/7a/">7a</a><br>
+	│   │   │   └── [&nbsp;142]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/7a/56a90baa7675f8bce3ea09f98aff8f20b6f6a2">56a90baa7675f8bce3ea09f98aff8f20b6f6a2</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/7b/">7b</a><br>
+	│   │   │   └── [&nbsp;268]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/7b/32d20049b1c38bc06eaca6c93fea7cc95d5626">32d20049b1c38bc06eaca6c93fea7cc95d5626</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/7f/">7f</a><br>
+	│   │   │   └── [4.9M]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/7f/c00d294cfce140bd4b3ffbc00f8614eb63f1a3">c00d294cfce140bd4b3ffbc00f8614eb63f1a3</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/81/">81</a><br>
+	│   │   │   └── [323K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/81/6e0282f847d882d8e726efbf8f62ab4d13ec8b">6e0282f847d882d8e726efbf8f62ab4d13ec8b</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/85/">85</a><br>
+	│   │   │   └── [588K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/85/0fb7638e774a4847d0ff73ade5942f6fd41bfc">0fb7638e774a4847d0ff73ade5942f6fd41bfc</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/87/">87</a><br>
+	│   │   │   └── [&nbsp;397]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/87/16372aadea8b5e8a09893aaf7aae5ac3b55870">16372aadea8b5e8a09893aaf7aae5ac3b55870</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/8b/">8b</a><br>
+	│   │   │   └── [&nbsp;527]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/8b/83a569ea6c3a26a03755e57326cf5aca89b461">83a569ea6c3a26a03755e57326cf5aca89b461</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/8d/">8d</a><br>
+	│   │   │   └── [&nbsp;105]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/8d/675fc0eae9b589aada0043f8a518c0538a9b9f">675fc0eae9b589aada0043f8a518c0538a9b9f</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/91/">91</a><br>
+	│   │   │   └── [2.5K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/91/1d3e20abd850b6a463008be9f90ea8c25f5663">1d3e20abd850b6a463008be9f90ea8c25f5663</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/9b/">9b</a><br>
+	│   │   │   └── [&nbsp;102]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/9b/949dbd5bd09f8663007221539812c212c2f0db">949dbd5bd09f8663007221539812c212c2f0db</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/9c/">9c</a><br>
+	│   │   │   └── [&nbsp;13K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/9c/c124505e7f96a1dce757a034a9ef5814fabcfa">c124505e7f96a1dce757a034a9ef5814fabcfa</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/9d/">9d</a><br>
+	│   │   │   └── [&nbsp;163]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/9d/35aa39ac600a4730e4f8d8a0743e55077b0936">35aa39ac600a4730e4f8d8a0743e55077b0936</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/9f/">9f</a><br>
+	│   │   │   └── [588K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/9f/005befb342aed4f28e9f135ff0299ce9095dd8">005befb342aed4f28e9f135ff0299ce9095dd8</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/a3/">a3</a><br>
+	│   │   │   └── [&nbsp;220]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/a3/108fcce0a6b50fdbf1b56cae0ef83c91ec6e5c">108fcce0a6b50fdbf1b56cae0ef83c91ec6e5c</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/a4/">a4</a><br>
+	│   │   │   └── [&nbsp;187]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/a4/21acea3eeee4125d89f3ca80fd27d63eb41317">21acea3eeee4125d89f3ca80fd27d63eb41317</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/b1/">b1</a><br>
+	│   │   │   └── [&nbsp;138]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/b1/6c850d5c3f4eb8bd733133cd9e33c5d1c3d191">6c850d5c3f4eb8bd733133cd9e33c5d1c3d191</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/b7/">b7</a><br>
+	│   │   │   └── [&nbsp;124]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/b7/fc6a1019dd0146df6463a3fb17d305d961cb3a">fc6a1019dd0146df6463a3fb17d305d961cb3a</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/b8/">b8</a><br>
+	│   │   │   └── [&nbsp;317]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/b8/990c45c6c8906eb283bf9e8c1f3aee2ed8eb1c">990c45c6c8906eb283bf9e8c1f3aee2ed8eb1c</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/c2/">c2</a><br>
+	│   │   │   └── [1.9K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/c2/d3e43dfe3de086b997b88480e42236e0493614">d3e43dfe3de086b997b88480e42236e0493614</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/c9/">c9</a><br>
+	│   │   │   └── [&nbsp;162]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/c9/5be53c97045bf61ee2ca3e8b5d411b9446d0f1">5be53c97045bf61ee2ca3e8b5d411b9446d0f1</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/ce/">ce</a><br>
+	│   │   │   └── [&nbsp;&nbsp;54]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/ce/fdf8a17630908947d25100ef297269c13a9aa3">fdf8a17630908947d25100ef297269c13a9aa3</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/d3/">d3</a><br>
+	│   │   │   └── [&nbsp;177]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/d3/acb6ebd35171e0bff27e6c20b9614a0b920bd6">acb6ebd35171e0bff27e6c20b9614a0b920bd6</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/d8/">d8</a><br>
+	│   │   │   ├── [&nbsp;&nbsp;69]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/d8/ba41c4a020360446c3c14cdaccf28273392ff2">ba41c4a020360446c3c14cdaccf28273392ff2</a><br>
+	│   │   │   └── [&nbsp;268]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/d8/fc3aec47d54a1a93033a4f92f402bf15eee4ea">fc3aec47d54a1a93033a4f92f402bf15eee4ea</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/dd/">dd</a><br>
+	│   │   │   └── [849K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/dd/604b9c6b2b2666ea1c42c0372359bc70d2b634">604b9c6b2b2666ea1c42c0372359bc70d2b634</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/de/">de</a><br>
+	│   │   │   └── [&nbsp;317]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/de/bd5d674ea070b57f89151a4c73787c64c182c3">bd5d674ea070b57f89151a4c73787c64c182c3</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/e8/">e8</a><br>
+	│   │   │   └── [1.9K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/e8/8e75c63fda13233193d976622867aaec67b953">8e75c63fda13233193d976622867aaec67b953</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/ea/">ea</a><br>
+	│   │   │   └── [&nbsp;159]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/ea/7ef771a040bd310d81f83008e18203bf1c945e">7ef771a040bd310d81f83008e18203bf1c945e</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/eb/">eb</a><br>
+	│   │   │   └── [491K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/eb/6b482a3712ca2453d88c2b9b2837dee5789448">6b482a3712ca2453d88c2b9b2837dee5789448</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/f5/">f5</a><br>
+	│   │   │   └── [&nbsp;100]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/f5/119fa42668740e33fea411e85a962c58bfecdd">119fa42668740e33fea411e85a962c58bfecdd</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/f8/">f8</a><br>
+	│   │   │   └── [&nbsp;33K]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/f8/9e657042b4b442e24ad5662f7068026e50400a">9e657042b4b442e24ad5662f7068026e50400a</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/fb/">fb</a><br>
+	│   │   │   └── [&nbsp;172]&nbsp;&nbsp;<a class="NORM" href="./.git/objects/fb/9783db2fdda71a02e0f56da0583d75fdc128a0">9783db2fdda71a02e0f56da0583d75fdc128a0</a><br>
+	│   │   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/info/">info</a><br>
+	│   │   └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/objects/pack/">pack</a><br>
+	│   ├── [&nbsp;112]&nbsp;&nbsp;<a class="NORM" href="./.git/packed-refs">packed-refs</a><br>
+	│   └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/refs/">refs</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/refs/heads/">heads</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── [&nbsp;&nbsp;41]&nbsp;&nbsp;<a class="NORM" href="./.git/refs/heads/main">main</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/refs/remotes/">remotes</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/refs/remotes/origin/">origin</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── [&nbsp;&nbsp;30]&nbsp;&nbsp;<a class="NORM" href="./.git/refs/remotes/origin/HEAD">HEAD</a><br>
+	│   &nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── [&nbsp;&nbsp;41]&nbsp;&nbsp;<a class="NORM" href="./.git/refs/remotes/origin/main">main</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.git/refs/tags/">tags</a><br>
+	├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./.ipynb_checkpoints/">.ipynb_checkpoints</a><br>
+	│   ├── [4.5K]&nbsp;&nbsp;<a class="NORM" href="./.ipynb_checkpoints/env-config-checkpoint.yml">env-config-checkpoint.yml</a><br>
+	│   ├── [906K]&nbsp;&nbsp;<a class="NORM" href="./.ipynb_checkpoints/MT_Car_Value_Appraiser-checkpoint.pdf">MT_Car_Value_Appraiser-checkpoint.pdf</a><br>
+	│   └── [&nbsp;695]&nbsp;&nbsp;<a class="NORM" href="./.ipynb_checkpoints/README-checkpoint.md">README-checkpoint.md</a><br>
+	├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./modules/">modules</a><br>
+	│   ├── [10.0K]&nbsp;&nbsp;<a class="NORM" href="./modules/CarScraping.py">CarScraping.py</a><br>
+	│   ├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./modules/.ipynb_checkpoints/">.ipynb_checkpoints</a><br>
+	│   │   └── [10.0K]&nbsp;&nbsp;<a class="NORM" href="./modules/.ipynb_checkpoints/CarScraping-checkpoint.py">CarScraping-checkpoint.py</a><br>
+	│   └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./modules/__pycache__/">__pycache__</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [7.6K]&nbsp;&nbsp;<a class="NORM" href="./modules/__pycache__/CarScraping.cpython-37.pyc">CarScraping.cpython-37.pyc</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [7.6K]&nbsp;&nbsp;<a class="NORM" href="./modules/__pycache__/CarScrapping.cpython-37.pyc">CarScrapping.cpython-37.pyc</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── [7.5K]&nbsp;&nbsp;<a class="NORM" href="./modules/__pycache__/CarScrapping.cpython-38.pyc">CarScrapping.cpython-38.pyc</a><br>
+	├── [906K]&nbsp;&nbsp;<a class="NORM" href="./MT_Car_Value_Appraiser.pdf">MT_Car_Value_Appraiser.pdf</a><br>
+	├── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./notebooks/">notebooks</a><br>
+	│   ├── [&nbsp;92K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/01_used_cars_scraping.ipynb">01_used_cars_scraping.ipynb</a><br>
+	│   ├── [&nbsp;15K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/02_renting_cars_scraping.ipynb">02_renting_cars_scraping.ipynb</a><br>
+	│   ├── [172K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/03_EDA_cars.ipynb">03_EDA_cars.ipynb</a><br>
+	│   ├── [&nbsp;87K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/04_Data_Cleansing_cars.ipynb">04_Data_Cleansing_cars.ipynb</a><br>
+	│   └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./notebooks/.ipynb_checkpoints/">.ipynb_checkpoints</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [&nbsp;92K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/.ipynb_checkpoints/01_used_cars_scraping-checkpoint.ipynb">01_used_cars_scraping-checkpoint.ipynb</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [&nbsp;15K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/.ipynb_checkpoints/02_renting_cars_scraping-checkpoint.ipynb">02_renting_cars_scraping-checkpoint.ipynb</a><br>
+	│   &nbsp;&nbsp;&nbsp; ├── [172K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/.ipynb_checkpoints/03_EDA_cars-checkpoint.ipynb">03_EDA_cars-checkpoint.ipynb</a><br>
+	│   &nbsp;&nbsp;&nbsp; └── [&nbsp;87K]&nbsp;&nbsp;<a class="NORM" href="./notebooks/.ipynb_checkpoints/04_Data_Cleansing_cars-checkpoint.ipynb">04_Data_Cleansing_cars-checkpoint.ipynb</a><br>
+	├── [&nbsp;695]&nbsp;&nbsp;<a class="NORM" href="./README.md">README.md</a><br>
+	├── [&nbsp;&nbsp;&nbsp;0]&nbsp;&nbsp;<a class="NORM" href="./tree.html">tree.html</a><br>
+	└── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./txt_guidelines/">txt_guidelines</a><br>
+	&nbsp;&nbsp;&nbsp; ├── [2.9K]&nbsp;&nbsp;<a class="NORM" href="./txt_guidelines/coches_webscrapping.txt">coches_webscrapping.txt</a><br>
+	&nbsp;&nbsp;&nbsp; └── [4.0K]&nbsp;&nbsp;<a class="DIR" href="./txt_guidelines/.ipynb_checkpoints/">.ipynb_checkpoints</a><br>
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── [2.9K]&nbsp;&nbsp;<a class="NORM" href="./txt_guidelines/.ipynb_checkpoints/coches_webscrapping-checkpoint.txt">coches_webscrapping-checkpoint.txt</a><br>
+	<br><br>
+	</p>
+	<p>
+
+93 directories, 130 files
+	<br><br>
+	</p>
+	<hr>
+	<p class="VERSION">
+		 tree v1.7.0 © 1996 - 2014 by Steve Baker and Thomas Moore <br>
+		 HTML output hacked and copyleft © 1998 by Francesc Rocher <br>
+		 JSON output hacked and copyleft © 2014 by Florian Sesser <br>
+		 Charsets / OS/2 support © 2001 by Kyosuke Tokoro
+	</p>
+</body>
+</html>
