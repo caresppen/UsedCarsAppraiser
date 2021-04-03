@@ -1,30 +1,5 @@
 import pandas as pd
-import numpy as np
-
-def car_type(data_dir):
-    '''
-    Function:
-    - Merging all datasets into one single dataframe.
-    - Final dataframe contains the type of car: offroad, minivan, familiar, ...
-    - Reorder columns to have an easier overview of the data.
-    
-    Parameters:
-    * data_dir = directory wich contains all the csv's to be merged.
-    '''
-    
-    # Setting a list with all the csv to be read and appended
-        
-    # Defining final column order
-    col_order = ['title', 'brand', 'model', 'year', 'kms', 'city', 'gearbox',
-                 'doors', 'seats', 'power', 'color', 'co2_emiss', 'fuel_type',
-                 'warranty', 'dealer', 'chassis', 'height', 'length', 'width',
-                 'trunk_vol', 'max_speed', 'urban_cons', 'xtrurban_cons',
-                 'mixed_cons', 'weight', 'tank_vol', 'acceleration', 'price']
-
-    df = df.reindex(columns=col_order)
-    
-    return df
-    
+import numpy as np    
 
 def clean_my_car(df):
     '''
@@ -41,7 +16,7 @@ def clean_my_car(df):
     # Extracting numbers from all the Qunatitative columns
     df['price'] = df.price.str.replace('.', '', regex=False).str.replace('€', '')
     df.loc[df.year.str.len() > 4, 'year'] = df.year.str[-4:]
-    df['kms'] = df.kms.str.replace('.', '', regex=False).str.replace('km', '')
+    df['kms'] = df.kms.str.replace('.', '', regex=False).str.replace('km', '').str.replace('NUEVO', '0')
     df['power'] = df.power.str.replace(' cv', '')
     df['co2_emiss'] = df.co2_emiss.str.replace(' gr/m', '')
     df['height'] = df.height.str.replace(' cm', '')
