@@ -18,7 +18,7 @@ def group_cars(data_dir):
     files = os.listdir(data_dir)
     
     # Filtering by the unnecessary files: using regex
-    regex = re.compile(r'renting.*|.ipynb.*')
+    regex = re.compile(r'renting.*|.ipynb.*|merged_cars.csv')
     sel_files = [i for i in files if not regex.match(i)]
     
     # Moving km0 & used cars files by the end of the list 
@@ -60,7 +60,7 @@ def order_att(df):
                  'doors', 'seats', 'power', 'color', 'co2_emiss', 'fuel_type',
                  'warranty', 'dealer', 'chassis', 'height', 'length', 'width',
                  'trunk_vol', 'max_speed', 'urban_cons', 'xtrurban_cons',
-                 'mixed_cons', 'weight', 'tank_vol', 'acceleration', 'price']
+                 'mixed_cons', 'weight', 'tank_vol', 'acc', 'price']
 
     df = df.reindex(columns=col_order)
     

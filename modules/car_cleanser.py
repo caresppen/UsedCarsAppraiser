@@ -10,7 +10,7 @@ def clean_my_car(df):
     - Columns standardization: Setting buckets to allocate all the components into a major group.
     
     Parameters:
-    * df = dataframe to be cleaned
+    * df = DataFrame to be cleaned
     '''
     
     # Extracting numbers from all the Qunatitative columns
@@ -24,12 +24,12 @@ def clean_my_car(df):
     df['width'] = df.width.str.replace(' cm', '')
     df[['trunk_vol']] = df.trunk_vol.str.replace(' l', '').str.replace('.', '', regex=False)
     df['max_speed'] = df.max_speed.str.replace(' km/h', '')
-    df['urban_cons'] = df.urban_cons.str.replace(' l', '').str.replace(',', '', regex=False)
-    df['xtrurban_cons'] = df.xtrurban_cons.str.replace(' l', '').str.replace(',', '', regex=False)
-    df['mixed_cons'] = df.mixed_cons.str.replace(' l', '').str.replace(',', '', regex=False)
+    df['urban_cons'] = df.urban_cons.str.replace(' l', '').str.replace(',', '.').astype(float)
+    df['xtrurban_cons'] = df.xtrurban_cons.str.replace(' l', '').str.replace(',', '.').astype(float)
+    df['mixed_cons'] = df.mixed_cons.str.replace(' l', '').str.replace(',', '.').astype(float)
     df['weight'] = df.weight.str.replace(' kg', '').str.replace('.', '', regex=False)
     df['tank_vol'] = df.tank_vol.str.replace(' l', '')
-    df['acceleration'] = df.width.str.replace(' s', '').str.replace(',', '', regex=False)
+    df['acceleration'] = df.acceleration.str.replace(' s', '').str.replace(',', '.').astype(float)
     
     # Cars cannot have None doors.
     # In the EDA, Renault Twizy was detected to have 0 doors, when actually has 2.
@@ -63,11 +63,19 @@ def clean_my_car(df):
     
     # Creating a dictionary to translate the chassis
     es_chassis = list(df.chassis.unique())
-    en_chassis = ['Sedan', 'Offroad', 'Stationwagon', 'Coupe', 'Van', 'Van', 'Minivan', 'Combi', 'Roadster', 'Van', 'Roadster', 'Pickup', 'Pickup', 'Van']
+    try:
+        es_chassis.remove('Chasis')
+        es_chassis.append('Chasis') # Adding 'Chasis' by the end of the list
+    except:
+        print('No Chasis in the DataFrame')
+    en_chassis = ['Convertible', 'Coupe', 'Roadster', 'Targa', 'Sedan', 'Minivan', 'Combi', 'Van', 'Van', 'Bus', 'Offroad', 'Pickup', 'Pickup', 'Stationwagon', 'Van']
     chassis_dict = dict(zip(es_chassis, en_chassis))
 
     for es, en in chassis_dict.items():
         df['chassis'] = df.chassis.str.replace(es, en)
+    
+    # Renaming columns
+    df = df.rename({'acceleration': 'acc'}, axis=1)
     
     return df
 
@@ -88,7 +96,7 @@ def brand_my_car(df):
     \b
     
     Parameters:
-    * df = dataframe to be cleaned
+    * df = DataFrame to obtain the car's brand/model
     '''
     
     # Conditional lists
@@ -126,6 +134,10 @@ def brand_my_car(df):
     # Dealing with Exceptions
     df['model'] = df.model.str.replace('Grande ', '') # FIAT: 'Grande Punto' evolved to 'Punto'
     df['model'] = df.model.str.replace('1.6i', 'Coupé', regex=False) # Citroen: '1.6i' is aka 'Coupé'
+    
+    # Changing model/brand to uppercase
+    df['model'] = df.model.str.upper()
+    df['brand'] = df.brand.str.upper()
 
     return df
 
@@ -133,11 +145,11 @@ def brand_my_car(df):
 def paint_my_car(df):
     '''
     Function:
-    - Cleans the dataset to 
+    - Cleans the dataset to obtain only general/common colors.
     - Translate colors from ES to EN.
     
     Parameters:
-    * df = dataframe to be cleaned
+    * df = DataFrame to be cleaned
     '''
     
     list_numbers = [str(x) for x in list(range(0, 10))]
@@ -156,7 +168,8 @@ def paint_my_car(df):
                    'BRONCE': 'BRONZE',
                    'VIOLETA': 'PURPLE', 'MORADO': 'PURPLE',
                    'ROSA': 'PINK',
-                   'OTRO': 'OTHER'}
+                   'OTRO': 'OTHER'
+                  }
     
     colors = sorted(df.color.dropna().unique())
     colors_up = [c.upper() for c in colors]
@@ -187,4 +200,30 @@ def paint_my_car(df):
         df.loc[df.color.str.contains(es_c), 'color'] = en_c
         df.loc[df.color.str.contains(en_c), 'color'] = en_c
 
+    return df
+
+
+def car_dtype(df):
+    '''
+    Function:
+    Changes the data types of the attributes of the input DataFrame.
+    
+    Parameters:
+    * df = DataFrame to be changed
+    '''
+    df['year'] = df.year.astype(int)
+    df['kms'] = df.kms.astype(int)
+    df['doors'] = df.doors.astype(int)
+    df['seats'] = df.seats.astype(int)
+    df['power'] = df.power.astype(int)
+    df['co2_emiss'] = df.co2_emiss.astype(int)
+    df['height'] = df.height.astype(int)
+    df['length'] = df.length.astype(int)
+    df['width'] = df.width.astype(int)
+    df['trunk_vol'] = df.trunk_vol.astype(int)
+    df['max_speed'] = df.max_speed.astype(int)
+    df['weight'] = df.weight.astype(int)
+    df['tank_vol'] = df.tank_vol.astype(int)
+    df['price'] = df.price.astype(int)
+    
     return df
