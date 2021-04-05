@@ -18,7 +18,7 @@ def group_cars(data_dir):
     files = os.listdir(data_dir)
     
     # Filtering by the unnecessary files: using regex
-    regex = re.compile(r'renting.*|.ipynb.*|merged_cars.csv')
+    regex = re.compile(r'renting.*|.ipynb.*|merged_cars.csv|cars.csv')
     sel_files = [i for i in files if not regex.match(i)]
     
     # Moving km0 & used cars files by the end of the list 
