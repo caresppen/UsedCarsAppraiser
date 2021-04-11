@@ -227,3 +227,17 @@ def car_dtype(df):
     df['price'] = df.price.astype(int)
     
     return df
+
+
+def rm_outliers(df):
+    '''
+    Function:
+    Detect the outliers on the DataFrame and removes them.
+    
+    Parameters:
+    * df = DataFrame to be cleaned
+    '''
+    df = df[df.price != df.price.max()]
+    
+    return df
+    
