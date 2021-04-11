@@ -65,9 +65,10 @@ def clean_renting(df):
     df['tank_vol'] = df.tank_vol.str.replace(' l', '')
     df['acceleration'] = df.acceleration.str.replace(' s', '').str.replace(',', '.').astype(float)
     
-    # Translating Warranty, Maintenance, Status, Fuel_type columns
+    # Translating Warranty, Maintenance, Status, Fuel_type, Tires columns
     df['warranty'] = df.warranty.str.replace('Incluido', 'Included')
-    df['maintenance'] = df.maintenance.str.replace('Incluido', 'Included')
+    df['tires'] = df.tires.str.replace('Incluido', 'Included')\
+                                .replace('No incluido', 'Not Included')
     df['maintenance'] = df.maintenance.str.replace('Incluido', 'Included')\
                                     .replace('No incluido', 'Not Included')
     df['status'] = df.status.str.replace('Nuevo', 'New')\
