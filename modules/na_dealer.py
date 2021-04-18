@@ -37,6 +37,17 @@ def cars_na(df):
     # Filling NaN values in 'co2_emiss' = electric cars
     df = df.fillna(0)
     
+    # Changing data formats after applying means
+    cols_dec = ['urban_cons', 'xtrurban_cons', 'mixed_cons', 'acc']
+    cols_format = ['kms', 'co2_emiss', 'height', 'length', 'width',
+               'trunk_vol', 'max_speed', 'weight', 'tank_vol']
+    
+    for col in cols_dec:
+        df[col] = round(df[col], 1)
+    
+    for col in cols_format:
+        df[col] = df[col].astype(int)
+    
     return df
 
 
