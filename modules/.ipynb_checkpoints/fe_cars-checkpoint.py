@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from category_encoders import SamplingBayesianEncoder
+from category_encoders import TargetEncoder
 
 def cars_na(df):
     '''
@@ -92,4 +94,3 @@ def calc_smooth_mean(df, by, on, m):
 
     # Replace each value by the according smoothed mean
     return df[by].map(smooth)
-
