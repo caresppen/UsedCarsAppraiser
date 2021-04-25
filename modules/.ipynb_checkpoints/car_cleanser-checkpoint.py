@@ -233,6 +233,7 @@ def rm_outliers(df):
     '''
     Function:
     Detect the outliers on the DataFrame and removes them.
+    Consider only those cars with a price lower than 100,000 to avoid that outliers distort the prediction. 
     
     Parameters:
     * df = DataFrame to be cleaned

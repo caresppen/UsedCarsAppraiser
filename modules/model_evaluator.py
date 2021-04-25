@@ -1,6 +1,7 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score
 from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 def eval_cls(y_test, predictions):
@@ -18,7 +19,9 @@ def eval_cls(y_test, predictions):
     
     cm = confusion_matrix(y_test, predictions)
     print("Confusion matrix:\n{}\n".format(cm))
-    sns.heatmap(cm, annot=True);
+    
+    fig, ax = plt.subplots(figsize=(10,10)) 
+    sns.heatmap(cm, annot=True, linewidths=.5, ax=ax);
     
 
 def eval_reg(y_test, predictions):
