@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from category_encoders import SamplingBayesianEncoder
+# from category_encoders import SamplingBayesianEncoder
 from category_encoders import TargetEncoder
 
 def cars_na(df):

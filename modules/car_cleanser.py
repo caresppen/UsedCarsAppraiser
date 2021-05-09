@@ -238,6 +238,7 @@ def rm_outliers(df):
     Parameters:
     * df = DataFrame to be cleaned
     '''
+    df = df[df.price <= 100000]
     df = df[df.price != df.price.max()]
     
     return df
