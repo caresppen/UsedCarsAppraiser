@@ -1,6 +1,6 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import mean_squared_error as mse, mean_absolute_error as mae, explained_variance_score as evs
-from sklearn.metrics import log_loss, mean_squared_log_error as msle
+from sklearn.metrics import log_loss, mean_squared_log_error as msle, r2_score
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -37,6 +37,7 @@ def eval_reg(y_test, predictions):
     print("### MEASURES OF REGRESSION MODEL ###")
     print("------------------------------------\n")
     
+    print("R2 = {0:.4f}\n".format(r2_score(y_test, predictions))) # R2
     print("RMSE = {0:.4f}\n".format(mse(y_test, predictions, squared=False))) # Root Mean Squared Error
     print("MSE = {0:.4f}\n".format(mse(y_test, predictions, squared=True))) # Mean Squared Error
     
