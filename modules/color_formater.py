@@ -13,7 +13,7 @@ def random_hex_colors(n):
     colorful_list = []
     
     for i in range(0, n):
-        random_number = random.randint(0, 16777215)
+        random_number = random.randint(0, 0xFFFFFF)
         hex_number = str(hex(random_number))
         hex_number = '#' + hex_number[2:]
         colorful_list.append(hex_number)
