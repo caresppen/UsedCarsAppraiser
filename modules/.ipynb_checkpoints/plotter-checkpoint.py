@@ -119,3 +119,71 @@ def chang_hug_map(X, hex_colors, FONT_SIZE=12, BINS=30):
     plt.tight_layout()
     plt.savefig('fig/09_col_trf.png')
     plt.show()
+    
+
+def autolabel(rects, ax):
+    '''
+    Function that aligns text labels at center-up in of each bar in a barplot.
+    
+    Parameter:
+    * rects = barplot as an argument
+    '''
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0,3),
+                    textcoords="offset points",
+                    ha="center",
+                    va="bottom")
+    
+def plot_model_eval(df, results):
+    '''
+    Create an evaluation plot. Contains a lineplot, barplot & boxplot that describe the performance of each model.
+    
+    Parameters:
+    * df = DataFrame to be explored
+    * results = resulting iterated values from the evaluated metric (i.e. R2 score)
+    '''
+    plt.style.use('tableau-colorblind10')
+    
+    fig = plt.figure(figsize=(15, 10))
+
+    ax_it = plt.subplot2grid(shape=(2,2), loc=(0, 0), colspan=2)
+    ax_mean = plt.subplot2grid(shape=(2,2), loc=(1, 0), colspan=1)
+    ax_box = plt.subplot2grid(shape=(2,2), loc=(1, 1), colspan=1)
+    axes = [ax_it, ax_mean, ax_box]
+
+    # Add K-Fold plot
+    sns.lineplot(data=results, dashes=True, ax=ax_it)
+
+    ax_it.set_title('Regression models cv performance per K-Fold')
+    ax_it.set_xlabel('K-Fold iteration')
+    ax_it.set_ylabel('$R^2$ score')
+
+    ax_it.set_xticks(np.arange(0, 10))
+    ax_it.set_xticklabels(tuple([str(i) for i in range(1,11)]))
+    ax_it.set_xlim([0, 9])
+
+    ax_it.legend(df.model.to_list())
+
+    # Add mean barplot
+    rect1 = ax_mean.bar(df['model'], df['mean_r2_score'])
+    ax_mean.set_ylim([0, 1])
+
+    ax_mean.set_title('Mean $R^2$ score of Regression Models')
+    ax_mean.set_xlabel('Model')
+    ax_mean.set_ylabel('$R^2$ score')
+    
+    autolabel(rect1, ax=ax_mean)
+
+    # Add boxplot
+    ax_box.boxplot(results)
+
+    ax_box.set_title('Regression Algorithms: Distribution Comparison')
+    ax_box.set_xlabel('Model')
+    ax_box.set_ylabel('$R^2$ score')
+    
+    ax_box.set_xticklabels(df.model)
+
+    plt.show()
