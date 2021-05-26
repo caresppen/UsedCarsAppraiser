@@ -1,0 +1,3 @@
+fit_transform(X)
+vs
+fit(X_train).transform(X_test)
