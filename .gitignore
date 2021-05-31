@@ -4,6 +4,4 @@
 */.ipynb_checkpoints/*
 notebooks/models/*
 notebooks/models/.ipynb_checkpoints
-.ipynb_checkpoints/
-**/*.ipynb_checkpoints/
-*/.ipynb_checkpoints/*
+notebooks/models/
