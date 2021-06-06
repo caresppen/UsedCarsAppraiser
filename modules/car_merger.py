@@ -19,7 +19,8 @@ def group_cars(data_dir):
     
     # Filtering by the unnecessary files: using regex
     regex = re.compile(r'renting.*|.ipynb.*|merged_cars.csv|cars.csv')
-    sel_files = [i for i in files if not regex.match(i)]
+    r_csv = re.compile(r'.*?.csv')
+    sel_files = [i for i in files if not regex.match(i) and r_csv.match(i)]
     
     # Moving km0 & used cars files by the end of the list 
     km0 = sel_files.pop(sel_files.index('km0_cars.csv'))
@@ -55,13 +56,16 @@ def order_att(df):
     Parameters:
     * df = DataFrame which columns need to be ordered.
     '''
-    # Defining final column order
+    # Defining final column order    
     col_order = ['title', 'brand', 'model', 'type', 'year', 'kms', 'city', 'gearbox',
                  'doors', 'seats', 'power', 'color', 'co2_emiss', 'fuel_type',
                  'warranty', 'dealer', 'chassis', 'height', 'length', 'width',
                  'trunk_vol', 'max_speed', 'urban_cons', 'xtrurban_cons',
                  'mixed_cons', 'weight', 'tank_vol', 'acc', 'price']
-
+    
+    # Dropping NaN
+    df = df.loc[:,~df.columns.duplicated()]
+    df = df.dropna()
     df = df.reindex(columns=col_order)
     
     return df

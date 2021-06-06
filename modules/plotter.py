@@ -63,14 +63,17 @@ def chang_hug_map(X, hex_colors, FONT_SIZE=12, BINS=30):
     colors = hex_colors
 
     # generating the plot
-    fig, axes = plt.subplots(nrows=8, ncols=15, figsize=(35, 20)) # cols = num of preprocessing methods + original
+    fig, axes = plt.subplots(nrows=12, ncols=15, figsize=(35, 25)) # cols = num of preprocessing methods + original
     axes = axes.flatten()
     axes_idxs = [(0, 15, 30, 45), (1, 16, 31, 46), (2, 17, 32, 47), (3, 18, 33, 48), (4, 19, 34, 49), (5, 20, 35, 50),    # first set
                  (6, 21, 36, 51), (7, 22, 37, 52), (8, 23, 38, 53), (9, 24, 39, 54), (10, 25, 40, 55), (11, 26, 41, 56),
                  (12, 27, 42, 57), (13, 28, 43, 58), (14, 29, 44, 59),
                  (60, 75, 90, 105), (61, 76, 91, 106), (62, 77, 92, 107), (63, 78, 93, 108), (64, 79, 94, 109), (65, 80, 95, 110),    # second set
                  (66, 81, 96, 111), (67, 82, 97, 112), (68, 83, 98, 113), (69, 84, 99, 114), (70, 85, 100, 115), (71, 86, 101, 116),
-                 (72, 87, 102, 117), (73, 88, 103, 118), (74, 89, 104, 119)]
+                 (72, 87, 102, 117), (73, 88, 103, 118), (74, 89, 104, 119),
+                 (120, 135, 150, 165), (121, 136, 151, 166), (122, 137, 152, 167), (123, 138, 153, 168), (124, 139, 154, 169), (125, 140, 155, 170),
+                 (126, 141, 156, 171), (127, 142, 157, 172), (128, 143, 158, 173), (129, 144, 159, 174), (130, 145, 160, 175), (131, 146, 161, 176),
+                 (132, 147, 162, 177), (133, 148, 163, 178), (134, 149, 164, 179)]
 
     axes_list = [(axes[i], axes[j], axes[k], axes[l])
                  for (i, j, k, l) in axes_idxs]
@@ -107,11 +110,12 @@ def chang_hug_map(X, hex_colors, FONT_SIZE=12, BINS=30):
             ax.set_xlim([-3.5, 3.5])
 
     # Setting last plot as empty
-    ax_original, ax_bc, ax_yj, ax_qt = axes_list[-1]
-    ax_original.axis('off')
-    ax_bc.axis('off')
-    ax_yj.axis('off')
-    ax_qt.axis('off')
+    for i in range(-10, 0):
+        ax_original, ax_bc, ax_yj, ax_qt = axes_list[i]
+        ax_original.axis('off')
+        ax_bc.axis('off')
+        ax_yj.axis('off')
+        ax_qt.axis('off')
 
     # Export and last adjustments
     plt.tight_layout()

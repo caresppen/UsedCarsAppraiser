@@ -46,20 +46,20 @@ def clean_my_car(df):
                     .str.replace('Real Ciudad', 'Ciudad Real').str.replace('Balears Illes', 'Baleares')
     
     # Translating Warranty, Dealer, Fuel_type columns
-    df['warranty'] = df.warranty.str.replace('SÍ', 'YES').replace('No', 'NO')
-    df['dealer'] = df.dealer.str.replace('Profesional', 'Professional').replace('Particular', 'Individual')
+    df['warranty'] = df.warranty.str.replace('SÍ', 'YES').str.replace('No', 'NO')
+    df['dealer'] = df.dealer.str.replace('Profesional', 'Professional').str.replace('Particular', 'Individual')
     df['fuel_type'] = df.fuel_type.str.replace('Gasolina', 'Gasoline')\
-                                    .replace('Eléctrico', 'Electric')\
-                                    .replace('Híbrido', 'Hybrid')
+                                    .str.replace('Eléctrico', 'Electric')\
+                                    .str.replace('Híbrido', 'Hybrid')
     
     # Translating gearbox column
     df = df.rename({'gear': 'gearbox'}, axis=1)
-    df['gearbox'] = df.gearbox.str.replace('Manual automatizada', 'Manual')\
-                            .str.replace('Automática continua, secuencial','Automatic')\
-                            .str.replace('Directo, sin caja de cambios', 'Direct')\
-                            .str.replace('Automática secuencial', 'Automatic')\
-                            .str.replace('Automática continua', 'Automatic')\
-                            .str.replace('Automática', 'Automatic')
+    df['gearbox'] = df.gearbox.replace('Manual automatizada', 'Manual')\
+                            .replace('Automática continua, secuencial','Automatic')\
+                            .replace('Directo, sin caja de cambios', 'Direct')\
+                            .replace('Automática secuencial', 'Automatic')\
+                            .replace('Automática continua', 'Automatic')\
+                            .replace('Automática', 'Automatic')
     
     # Creating a dictionary to translate the chassis
     es_chassis = list(df.chassis.unique())
@@ -239,7 +239,7 @@ def rm_outliers(df):
     * df = DataFrame to be cleaned
     '''
     df = df[df.price <= 100000]
-    df = df[df.price != df.price.max()]
+    df = df[df.kms <= 500000]
     
     return df
     
