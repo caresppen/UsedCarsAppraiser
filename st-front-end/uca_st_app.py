@@ -31,8 +31,8 @@ def user_input_features():
     """
     Generates a DataFrame with all the inputs that the user did to make a prediction
     """
-    BRAND = st.sidebar.selectbox('Brand', X.brand.unique())
-    MODEL = st.sidebar.selectbox('Model', X[X.brand == BRAND].model.unique())
+    BRAND = st.sidebar.selectbox('Brand', X.brand.unique(), index=int(np.where(X.brand.unique()=='SEAT')[0][0]), help='Choose car brand')
+    MODEL = st.sidebar.selectbox('Model', X[X.brand == BRAND].model.unique(), index=11, help='Models available for the selected brand')
     TYPE = st.sidebar.selectbox('Type', X.type.unique())
     CITY = st.sidebar.selectbox('City', X.city.unique())
     GEARBOX = st.sidebar.selectbox('Gearbox', X.gearbox.unique())
@@ -89,9 +89,10 @@ def user_input_features():
     return features
 
 # Write input features set
-df = user_input_features()
+df_input = user_input_features()
+df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
 st.subheader('User Inputs: Technical specs')
-st.write(df)
+st.write(df_input)
 st.write('---')
 
 ### Feature Engineering
@@ -99,8 +100,7 @@ ohe_cols = ['gearbox', 'fuel_type', 'warranty', 'dealer', 'doors']
 
 # OHE
 ohe = OneHotEncoder(categories='auto')
-ohe.fit_transform(X[ohe_cols]).toarray()
-feature_arr = ohe.transform(df[ohe_cols]).toarray()
+feature_arr = ohe.fit_transform(df[ohe_cols]).toarray()
 feature_labels = ohe.categories_
 
 # Using a dictionary to produce all the new OHE columns
@@ -111,14 +111,15 @@ for k, v in dict(zip(ohe_cols, feature_labels)).items():
         feature_cols.append(el)
 
 ohe_features = pd.DataFrame(feature_arr, columns=feature_cols)
-df = pd.concat([df, ohe_features], axis=1).drop(ohe_cols, axis=1)
+df = pd.concat([df, ohe_features], axis=1)
+df = df.drop(ohe_cols, axis=1)
 
 # Target Encoding
 cat_cols = df.select_dtypes(exclude=["number"]).columns
 cols_encoded = list(map(lambda c: c + '_encoded', cat_cols))
 
 t_encoder = TargetEncoder()
-X_enc = t_encoder.fit_transform(X[cat_cols], y)
+t_encoder.fit(df[1:][cat_cols], y)
 df[cols_encoded] = t_encoder.transform(df[cat_cols])
 df = df.drop(cat_cols, axis=1)
 
@@ -127,38 +128,42 @@ qt = QuantileTransformer(n_quantiles=500,
                          output_distribution='normal',
                          random_state=33)
 
-qt.fit_transform(X_enc) # y: How to apply Target Encoding to new data after trained model???
-df = qt.transform(df)
+data = qt.fit_transform(df)
+df = pd.DataFrame(data, columns=df.columns)
 
-st.write(df)
+# Taking only first row after Feature Engineering to predict user's input
+df_predict = df[:1]
 
 # Load in model
 cb_model = decompress_pickle("notebooks/models/cb_model.pbz2")
 
 # Apply model to predict price
-prediction = cb_model.predict(df)
+prediction = cb_model.predict(df_predict)
 st.write('Prediction of second-hand car price:')
 st.write(prediction)
 st.write('---')
 
 # Explaining model's ouput predictions using SHAP API
-X = cars.drop(['title', 'price'], axis=1)
-y = cars['price']
+df_shap = df[1:501]
+explainer = shap.Explainer(cb_model)
+shap_values = explainer(df_shap)
 
-explainer = shap.TreeExplainer(cb_model)
-shap_values = explainer.shap_values(X)
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 st.header('Feature Importance to the prediction')
 
-plt.title('Feature importance based on SHAP values')
-shap.summary_plot(shap_values, X)
+plt.title('Feature importance to the model')
+shap.plots.beeswarm(shap_values)
 st.pyplot(bbox_inches='tight')
 st.write('---')
 
-plt.title('Feature importance based on SHAP values (bar)')
-shap.summary_plot(shap_values, X, plot_type='bar')
+plt.title('Feature contribution to prediction')
+shap.plots.waterfall(shap_values[0])
 st.pyplot(bbox_inches='tight')
+st.write('---')
 
+plt.title('Mean absolute value based on SHAP values for each feature')
+shap.plots.bar(shap_values)
+st.pyplot(bbox_inches='tight')
 st.write('---')
 
 # Final reference to the project
@@ -166,5 +171,6 @@ st.subheader('References')
 st.write("""
 For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
 Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
+
 Created by Carlos Espejo Peña.
 """)
