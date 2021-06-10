@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 # from category_encoders import SamplingBayesianEncoder
 from category_encoders import TargetEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import QuantileTransformer
 
 def cars_na(df):
     '''
@@ -94,3 +96,48 @@ def calc_smooth_mean(df, by, on, m):
 
     # Replace each value by the according smoothed mean
     return df[by].map(smooth)
+
+
+def frontend_preproc(df, y):
+    '''
+    Function that produces the preprocessing of the DataFrame before applying the model on the front-end.
+    :df: concat of df_input by the user and X features of the model
+    :y: target
+    '''
+    ### Feature Engineering
+    ohe_cols = ['gearbox', 'fuel_type', 'warranty', 'dealer', 'doors']
+
+    # OHE
+    ohe = OneHotEncoder(categories='auto')
+    feature_arr = ohe.fit_transform(df[ohe_cols]).toarray()
+    feature_labels = ohe.categories_
+
+    # Using a dictionary to produce all the new OHE columns
+    feature_cols = []
+    for k, v in dict(zip(ohe_cols, feature_labels)).items():
+        for i in v:
+            el = k + '_' + str(i)
+            feature_cols.append(el)
+
+    ohe_features = pd.DataFrame(feature_arr, columns=feature_cols)
+    df = pd.concat([df, ohe_features], axis=1)
+    df = df.drop(ohe_cols, axis=1)
+
+    # Target Encoding
+    cat_cols = df.select_dtypes(exclude=["number"]).columns
+    cols_encoded = list(map(lambda c: c + '_encoded', cat_cols))
+
+    t_encoder = TargetEncoder()
+    t_encoder.fit(df[1:][cat_cols], y)
+    df[cols_encoded] = t_encoder.transform(df[cat_cols])
+    df = df.drop(cat_cols, axis=1)
+
+    # Column Transformation: QuantileTransformer
+    qt = QuantileTransformer(n_quantiles=500,
+                             output_distribution='normal',
+                             random_state=33)
+
+    data = qt.fit_transform(df)
+    df = pd.DataFrame(data, columns=df.columns)
+    
+    return df

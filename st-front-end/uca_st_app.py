@@ -5,17 +5,15 @@ import pickle
 from PIL import Image
 import sys
 sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
+from modules.fe_cars import frontend_preproc
 from modules.pickle_jar import decompress_pickle
 import shap
 import matplotlib.pyplot as plt
 import seaborn
-from category_encoders import TargetEncoder
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import QuantileTransformer
 
 st.header("Used Cars **App**raisser")
 st.write("""
-This application is based on a ML Random Forest algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€
+This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
 """)
 st.write('---')
 
@@ -31,16 +29,16 @@ def user_input_features():
     """
     Generates a DataFrame with all the inputs that the user did to make a prediction
     """
-    BRAND = st.sidebar.selectbox('Brand', X.brand.unique(), index=int(np.where(X.brand.unique()=='SEAT')[0][0]), help='Choose car brand')
-    MODEL = st.sidebar.selectbox('Model', X[X.brand == BRAND].model.unique(), index=11, help='Models available for the selected brand')
-    TYPE = st.sidebar.selectbox('Type', X.type.unique())
-    CITY = st.sidebar.selectbox('City', X.city.unique())
-    GEARBOX = st.sidebar.selectbox('Gearbox', X.gearbox.unique())
-    COLOR = st.sidebar.selectbox('Color', X.color.unique())
-    FUEL = st.sidebar.selectbox('Fuel', X.fuel_type.unique())
+    BRAND = st.sidebar.selectbox('Brand', X.brand.unique(), index=int(np.where(X.brand.unique()=='VOLVO')[0][0]), help='Choose car brand')
+    MODEL = st.sidebar.selectbox('Model', X[X.brand == BRAND].model.unique(), index=2, help='Models available for the selected brand')
+    TYPE = st.sidebar.selectbox('Type', X.type.unique(), index=int(np.where(X.type.unique()=='medium')[0][0]))
+    CITY = st.sidebar.selectbox('City', X.city.unique(), index=int(np.where(X.city.unique()=='Sevilla')[0][0]))
+    GEARBOX = st.sidebar.selectbox('Gearbox', X.gearbox.unique(), index=int(np.where(X.gearbox.unique()=='Manual')[0][0]))
+    COLOR = st.sidebar.selectbox('Color', X.color.unique(), index=int(np.where(X.color.unique()=='WHITE')[0][0]))
+    FUEL = st.sidebar.selectbox('Fuel', X.fuel_type.unique(), index=int(np.where(X.fuel_type.unique()=='Gasoline')[0][0]))
     WARRANTY = st.sidebar.selectbox('Warranty', X.warranty.unique())
     DEALER = st.sidebar.selectbox('Dealer', X.dealer.unique())
-    CHASSIS = st.sidebar.selectbox('Chassis', X.chassis.unique())
+    CHASSIS = st.sidebar.selectbox('Chassis', X.chassis.unique(), index=int(np.where(X.chassis.unique()=='Sedan')[0][0]))
     YEAR = st.sidebar.slider('Year', X.year.min(), X.year.max(), int(round(X.year.mean(),0)))
     KMS = st.sidebar.slider('Kms', X.kms.min(), X.kms.max(), int(round(X.kms.mean(),0)))
     DOORS = st.sidebar.slider('Doors', X.doors.min(), X.doors.max(), int(round(X.doors.mean(),0)))
@@ -93,58 +91,27 @@ df_input = user_input_features()
 df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
 st.subheader('User Inputs: Technical specs')
 st.write(df_input)
-st.write('---')
 
-### Feature Engineering
-ohe_cols = ['gearbox', 'fuel_type', 'warranty', 'dealer', 'doors']
-
-# OHE
-ohe = OneHotEncoder(categories='auto')
-feature_arr = ohe.fit_transform(df[ohe_cols]).toarray()
-feature_labels = ohe.categories_
-
-# Using a dictionary to produce all the new OHE columns
-feature_cols = []
-for k, v in dict(zip(ohe_cols, feature_labels)).items():
-    for i in v:
-        el = k + '_' + str(i)
-        feature_cols.append(el)
-
-ohe_features = pd.DataFrame(feature_arr, columns=feature_cols)
-df = pd.concat([df, ohe_features], axis=1)
-df = df.drop(ohe_cols, axis=1)
-
-# Target Encoding
-cat_cols = df.select_dtypes(exclude=["number"]).columns
-cols_encoded = list(map(lambda c: c + '_encoded', cat_cols))
-
-t_encoder = TargetEncoder()
-t_encoder.fit(df[1:][cat_cols], y)
-df[cols_encoded] = t_encoder.transform(df[cat_cols])
-df = df.drop(cat_cols, axis=1)
-
-# Column Transformation: QuantileTransformer
-qt = QuantileTransformer(n_quantiles=500,
-                         output_distribution='normal',
-                         random_state=33)
-
-data = qt.fit_transform(df)
-df = pd.DataFrame(data, columns=df.columns)
+# Applying feature engineering to the DataFrame before applying the model
+df = frontend_preproc(df, y)
 
 # Taking only first row after Feature Engineering to predict user's input
-df_predict = df[:1]
+df_pred = df[:1]
 
 # Load in model
 cb_model = decompress_pickle("notebooks/models/cb_model.pbz2")
 
 # Apply model to predict price
-prediction = cb_model.predict(df_predict)
-st.write('Prediction of second-hand car price:')
+prediction = cb_model.predict(df_pred)
+prediction = pd.DataFrame(prediction, columns=["Price prediction"])\
+                .style.format('{:20,.2f}€')
+
+st.write("The reasonable price for this second-hand car:")
 st.write(prediction)
 st.write('---')
 
 # Explaining model's ouput predictions using SHAP API
-df_shap = df[1:501]
+df_shap = df[:500]
 explainer = shap.Explainer(cb_model)
 shap_values = explainer(df_shap)
 
@@ -154,12 +121,6 @@ st.header('Feature Importance to the prediction')
 plt.title('Feature importance to the model')
 shap.plots.beeswarm(shap_values)
 st.pyplot(bbox_inches='tight')
-st.write('---')
-
-plt.title('Feature contribution to prediction')
-shap.plots.waterfall(shap_values[0])
-st.pyplot(bbox_inches='tight')
-st.write('---')
 
 plt.title('Mean absolute value based on SHAP values for each feature')
 shap.plots.bar(shap_values)
