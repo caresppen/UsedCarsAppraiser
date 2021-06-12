@@ -13,7 +13,7 @@ import seaborn
 
 st.header("Used Cars **App**raisser")
 st.write("""
-This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
+Thinking about buying a second-hand car in Spain? This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
 """)
 st.write('---')
 
@@ -29,8 +29,8 @@ def user_input_features():
     """
     Generates a DataFrame with all the inputs that the user did to make a prediction
     """
-    BRAND = st.sidebar.selectbox('Brand', X.brand.unique(), index=int(np.where(X.brand.unique()=='VOLVO')[0][0]), help='Choose car brand')
-    MODEL = st.sidebar.selectbox('Model', X[X.brand == BRAND].model.unique(), index=2, help='Models available for the selected brand')
+    BRAND = st.sidebar.selectbox('Brand', np.sort(X.brand.unique()), index=int(np.where(np.sort(X.brand.unique())=='VOLVO')[0][0]), help='Choose car brand')
+    MODEL = st.sidebar.selectbox('Model', np.sort(X[X.brand == BRAND].model.unique()), index=int(len(X[X.brand == BRAND].model.unique())/2), help='Models available for the selected brand')
     TYPE = st.sidebar.selectbox('Type', X.type.unique(), index=int(np.where(X.type.unique()=='medium')[0][0]))
     CITY = st.sidebar.selectbox('City', X.city.unique(), index=int(np.where(X.city.unique()=='Sevilla')[0][0]))
     GEARBOX = st.sidebar.selectbox('Gearbox', X.gearbox.unique(), index=int(np.where(X.gearbox.unique()=='Manual')[0][0]))
@@ -40,7 +40,7 @@ def user_input_features():
     DEALER = st.sidebar.selectbox('Dealer', X.dealer.unique())
     CHASSIS = st.sidebar.selectbox('Chassis', X.chassis.unique(), index=int(np.where(X.chassis.unique()=='Sedan')[0][0]))
     YEAR = st.sidebar.slider('Year', X.year.min(), X.year.max(), int(round(X.year.mean(),0)))
-    KMS = st.sidebar.slider('Kms', X.kms.min(), X.kms.max(), int(round(X.kms.mean(),0)))
+    KMS = st.sidebar.number_input('Kms', 0, 500000, int(round(X.kms.mean(),0)), help='Select a value between 0 and 500,000')
     DOORS = st.sidebar.slider('Doors', X.doors.min(), X.doors.max(), int(round(X.doors.mean(),0)))
     SEATS = st.sidebar.slider('Seats', X.seats.min(), X.seats.max(), int(round(X.seats.mean(),0)))
     POWER = st.sidebar.slider('Power', X.power.min(), X.power.max(), int(round(X.power.mean(),0)))
