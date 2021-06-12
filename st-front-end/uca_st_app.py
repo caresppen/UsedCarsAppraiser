@@ -7,25 +7,8 @@ import sys
 sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
 from modules.fe_cars import frontend_preproc
 from modules.pickle_jar import decompress_pickle
-import shap
-import matplotlib.pyplot as plt
-import seaborn
 
-st.header("Used Cars **App**raisser")
-st.write("""
-Thinking about buying a second-hand car in Spain? This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
-""")
-st.write('---')
-
-# Load Cars dataset
-cars = pd.read_csv('data/cleaned_cars.csv')
-X = cars.drop(['title', 'price'], axis=1)
-y = cars['price']
-
-# Sidebar
-st.sidebar.header('Specify Input Features')
-
-def user_input_features():
+def user_input_features(X):
     """
     Generates a DataFrame with all the inputs that the user did to make a prediction
     """
@@ -86,52 +69,64 @@ def user_input_features():
     
     return features
 
-# Write input features set
-df_input = user_input_features()
-df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
-st.subheader('User Inputs: Technical specs')
-st.write(df_input)
+def main():
+    st.header("Used Cars **App**raisser")
+    st.write("""
+    Thinking about buying a second-hand car in Spain? This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
+    """)
+    st.write('---')
 
-# Applying feature engineering to the DataFrame before applying the model
-df = frontend_preproc(df, y)
+    # Load Cars dataset
+    cars = pd.read_csv('data/cleaned_cars.csv')
+    X = cars.drop(['title', 'price'], axis=1)
+    y = cars['price']
 
-# Taking only first row after Feature Engineering to predict user's input
-df_pred = df[:1]
+    # Sidebar
+    st.sidebar.header('Specify Input Parameters')
 
-# Load in model
-cb_model = decompress_pickle("notebooks/models/cb_model.pbz2")
+    # Write input features set
+    df_input = user_input_features(X)
+    df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
+    st.subheader('User Inputs: Technical specs')
+    st.write(df_input)
 
-# Apply model to predict price
-prediction = cb_model.predict(df_pred)
-prediction = pd.DataFrame(prediction, columns=["Price prediction"])\
-                .style.format('{:20,.2f}€')
+    # Applying feature engineering to the DataFrame before applying the model
+    df = frontend_preproc(df, y)
 
-st.write("The reasonable price for this second-hand car:")
-st.write(prediction)
-st.write('---')
+    # Taking only first row after Feature Engineering to predict user's input
+    df_pred = df[:1]
 
-# Explaining model's ouput predictions using SHAP API
-df_shap = df[:500]
-explainer = shap.Explainer(cb_model)
-shap_values = explainer(df_shap)
+    # Load in model
+    cb_model = decompress_pickle("notebooks/models/cb_model.pbz2")
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
-st.header('Feature Importance to the prediction')
+    # Apply model to predict price
+    prediction = cb_model.predict(df_pred)
+    prediction = pd.DataFrame(prediction, columns=["Price prediction"])\
+                    .style.format('{:20,.2f}€')
 
-plt.title('Feature importance to the model')
-shap.plots.beeswarm(shap_values)
-st.pyplot(bbox_inches='tight')
+    st.write("The reasonable price for this second-hand car is:")
+    st.write(prediction)
+    st.write('---')
 
-plt.title('Mean absolute value based on SHAP values for each feature')
-shap.plots.bar(shap_values)
-st.pyplot(bbox_inches='tight')
-st.write('---')
+    # Explaining model's ouput predictions using SHAP plotted values
+    st.subheader('Parameters impact')
+    st.write('''The color represents the parameters values (red is high, blue is low). SHAP plots show the distribution of the impacts each parameter has on the final price prediction.
 
-# Final reference to the project
-st.subheader('References')
-st.write("""
-For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
-Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
+    This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, the higher the total number of kilometers of the car, the lower the price.
+    ''')
+    img1 = Image.open('notebooks/fig/12_shap_model_distribution.png')
+    img2 = Image.open('notebooks/fig/12_shap_model_barplot.png')
+    st.image([img1, img2])
+    st.write('---')
 
-Created by Carlos Espejo Peña.
-""")
+    # Final reference to the project
+    st.subheader('References')
+    st.write("""
+    For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
+    Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
+
+    Created by Carlos Espejo Peña | [LinkedIn](https://www.linkedin.com/in/carlosespejopena/) | [GitHub](https://github.com/caresppen)
+    """)
+    
+if __name__ == '__main__':
+    main()
