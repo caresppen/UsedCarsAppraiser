@@ -79,19 +79,19 @@ def page_params():
     
     st.set_page_config(**PAGE_CONFIG)
     
-#     page_bg_img = '''
-#     <style>
-#     .stApp {
-#         background-image: url("https://drive.google.com/uc?export=view&id=1ZlLnr5nLLTGBYA7xWpE3picPEIsMTWCE");
-#         background-size: cover;
-#     }
-#     </style>
-#     '''
+    page_bg_img = '''
+    <style>
+    .stApp {
+        background-image: url("https://drive.google.com/uc?export=view&id=1ZlLnr5nLLTGBYA7xWpE3picPEIsMTWCE");
+        background-size: cover;
+    }
+    </style>
+    '''
 
-#     st.markdown(page_bg_img, unsafe_allow_html=True)
+    st.markdown(page_bg_img, unsafe_allow_html=True)
     
     # White: https://biddown.com/wp-content/uploads/2020/03/4-41860_white-wallpaper-background-full-hd-background-white.jpg
-    # Google Drive: https://drive.google.com/uc?export=view&id=your_id
+    # Google Drive: https://drive.google.com/uc?export=view&id=1ZlLnr5nLLTGBYA7xWpE3picPEIsMTWCE
     
     # Icon: https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png
     # Bugatti: https://pngimg.com/uploads/bugatti/bugatti_PNG31.png
