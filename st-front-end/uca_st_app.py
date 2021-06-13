@@ -162,7 +162,7 @@ def main():
     st.subheader(':bar_chart: Parameters impact')
     st.write('''The color represents the parameters values (red is high, blue is low). SHAP plots show the distribution of the impacts each parameter has on the final price prediction.
     
-This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, the higher the total number of kilometers of the car, the lower the price.
+This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, it is possible to conclude that the higher the total number of kilometers of the car, the lower the price.
     ''')
     img1 = Image.open('notebooks/fig/12_shap_model_distribution.png')
     img2 = Image.open('notebooks/fig/12_shap_model_barplot.png')
