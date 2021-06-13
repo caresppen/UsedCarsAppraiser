@@ -33,7 +33,7 @@ def user_input_features(X):
     WIDTH = st.sidebar.slider('Width', int(X.width.min()), int(X.width.max()), int(round(X.width.mean(),0)))
     TRUNK = st.sidebar.slider('Trunk volume', int(X.trunk_vol.min()), int(X.trunk_vol.max()), int(round(X.trunk_vol.mean(),0)))
     SPEED = st.sidebar.slider('Max speed', int(X.max_speed.min()), int(X.max_speed.max()), int(round(X.max_speed.mean(),0)))
-    CONS = st.sidebar.slider('Mixed consumption', float(X.mixed_cons.min()), float(X.mixed_cons.max()), X.mixed_cons.mean())
+    CONS = st.sidebar.slider('Mixed consumption', float(X.mixed_cons.min()), float(X.mixed_cons.max()), float(X.mixed_cons.mean()))
     WEIGHT = st.sidebar.slider('Weight', int(X.weight.min()), int(X.weight.max()), int(round(X.weight.mean(),0)))
     TANK = st.sidebar.slider('Tank volume', int(X.tank_vol.min()), int(X.tank_vol.max()), int(round(X.tank_vol.mean(),0)))
     ACC = st.sidebar.slider('Acceleration', float(X.acc.min()), float(X.acc.max()), float(X.acc.mean()))
