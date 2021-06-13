@@ -105,7 +105,7 @@ def page_params():
     # Wheel: https://image.flaticon.com/icons/png/512/3003/3003735.png
     # Mario: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/c8a2987f-3e2e-4e4d-9aac-27d02b24bdd3/d6th2q4-8588e7b0-13bb-45e2-b881-51115b5d03a3.png
 
-    
+
 def html_header(url):
      st.markdown(f'<b style="color:#439AD6;font-size:32px;">{url}</b>', unsafe_allow_html=True)
 
