@@ -1,3 +1,5 @@
+mkdir -p ~/.streamlit/
+
 echo "
 [server]
 headless = true
