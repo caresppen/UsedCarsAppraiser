@@ -2,9 +2,5 @@
 primaryColor = "#439AD6"
 backgroundColor = "#0E1117"
 secondaryBackgroundColor = "#31333F"
-textColor= "#FAFAFA"
+textColor = "#FAFAFA"
 font = "sans serif"
-[server]
-headless = true
-port = $PORT
-enableCORS = false
