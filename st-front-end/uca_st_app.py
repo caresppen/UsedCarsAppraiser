@@ -121,7 +121,7 @@ def main():
     
     html_header("Used Cars APPraisser")
     st.write("""
-    Thinking about buying a second-hand car in Spain? This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
+    Thinking about buying a second-hand car in Spain? This application will help you find a fair price for your desired car. The model, which is based on a ML CatBoost algorithm, was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
     """)
     st.write('---')
 
