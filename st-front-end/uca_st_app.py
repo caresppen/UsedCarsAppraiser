@@ -71,12 +71,27 @@ def user_input_features(X):
 
 
 def page_params():
+    
     PAGE_CONFIG = {"page_title": "UCApp",
                    "page_icon": "https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png",
                    "layout": "centered",
                    "initial_sidebar_state": "auto"}
     
     st.set_page_config(**PAGE_CONFIG)
+    
+#     page_bg_img = '''
+#     <style>
+#     .stApp {
+#         background-image: url("https://drive.google.com/uc?export=view&id=1ZlLnr5nLLTGBYA7xWpE3picPEIsMTWCE");
+#         background-size: cover;
+#     }
+#     </style>
+#     '''
+
+#     st.markdown(page_bg_img, unsafe_allow_html=True)
+    
+    # White: https://biddown.com/wp-content/uploads/2020/03/4-41860_white-wallpaper-background-full-hd-background-white.jpg
+    # Google Drive: https://drive.google.com/uc?export=view&id=your_id
     
     # Icon: https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png
     # Bugatti: https://pngimg.com/uploads/bugatti/bugatti_PNG31.png
@@ -91,8 +106,12 @@ def page_params():
     # Mario: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/c8a2987f-3e2e-4e4d-9aac-27d02b24bdd3/d6th2q4-8588e7b0-13bb-45e2-b881-51115b5d03a3.png
 
     
-def header(url):
-     st.markdown(f'<b style="color:#384b8f;font-size:32px;">{url}</b>', unsafe_allow_html=True)
+def html_header(url):
+     st.markdown(f'<b style="color:#439AD6;font-size:32px;">{url}</b>', unsafe_allow_html=True)
+
+
+def html_text(url):
+     st.markdown(f'<p style="background-color:#FFFFFF;color:#384B8F;">{url}</p>', unsafe_allow_html=True)
 
     
 def main():
@@ -100,7 +119,7 @@ def main():
     # Set page parameters
     page_params()
     
-    header("Used Cars APPraisser")
+    html_header("Used Cars APPraisser")
     st.write("""
     Thinking about buying a second-hand car in Spain? This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
     """)
@@ -110,16 +129,16 @@ def main():
     cars = pd.read_csv('data/cleaned_cars.csv')
     X = cars.drop(['title', 'price'], axis=1)
     y = cars['price']
-
+    
     # Sidebar
-    st.sidebar.header('Specify Input Parameters')
+    st.sidebar.header(':gear: Specify Input Parameters')
 
     # Write input features set
     df_input = user_input_features(X)
     df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
-    st.subheader('User Inputs: Technical specs')
-    st.write(df_input)
-
+    st.subheader(':computer: User Inputs: Technical specs')
+    st.dataframe(df_input)
+    
     # Applying feature engineering to the DataFrame before applying the model
     df = frontend_preproc(df, y)
 
@@ -130,16 +149,17 @@ def main():
     cb_model = decompress_pickle("notebooks/models/cb_model.pbz2")
 
     # Apply model to predict price
+    st.subheader(":crystal_ball: Prediction")
     prediction = cb_model.predict(df_pred)
     prediction = pd.DataFrame(prediction, columns=["Price prediction"])\
                     .style.format('{:20,.2f}€')
 
     st.write("The reasonable price for this second-hand car is:")
-    st.write(prediction)
+    st.dataframe(prediction)
     st.write('---')
 
     # Explaining model's ouput predictions using SHAP plotted values
-    st.subheader('Parameters impact')
+    st.subheader(':bar_chart: Parameters impact')
     st.write('''The color represents the parameters values (red is high, blue is low). SHAP plots show the distribution of the impacts each parameter has on the final price prediction.
     
 This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, the higher the total number of kilometers of the car, the lower the price.
@@ -150,7 +170,7 @@ This explains for example that a low manufactured year, lowers the final predict
     st.write('---')
 
     # Final reference to the project
-    st.subheader('References')
+    st.subheader(':link: References')
     st.write("""
     For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
     Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
