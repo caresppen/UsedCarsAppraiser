@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 from PIL import Image
 import sys
 sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
@@ -10,7 +9,8 @@ from modules.pickle_jar import decompress_pickle
 
 def user_input_features(X):
     """
-    Generates a DataFrame with all the inputs that the user did to make a prediction
+    Generates a DataFrame with all the inputs that the user did to make a prediction.
+    New add-in: Read a coches.com input URL from the user
     """
     BRAND = st.sidebar.selectbox('Brand', np.sort(X.brand.unique()), index=int(np.where(np.sort(X.brand.unique())=='VOLVO')[0][0]), help='Choose car brand')
     MODEL = st.sidebar.selectbox('Model', np.sort(X[X.brand == BRAND].model.unique()), index=int(len(X[X.brand == BRAND].model.unique())/2), help='Models available for the selected brand')
@@ -69,8 +69,38 @@ def user_input_features(X):
     
     return features
 
+
+def page_params():
+    PAGE_CONFIG = {"page_title": "UCApp",
+                   "page_icon": "https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png",
+                   "layout": "centered",
+                   "initial_sidebar_state": "auto"}
+    
+    st.set_page_config(**PAGE_CONFIG)
+    
+    # Icon: https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png
+    # Bugatti: https://pngimg.com/uploads/bugatti/bugatti_PNG31.png
+    # AUDI: https://image.flaticon.com/icons/png/512/741/741460.png
+    # BMW: https://img-premium.flaticon.com/png/512/741/741403.png?token=exp=1623588793~hmac=189aba02502ff104d954d153cb7e675a
+    # Normal Red: https://img-premium.flaticon.com/png/512/3085/3085330.png?token=exp=1623588897~hmac=4c4646b5fc8ae43fbfdb648781b25741
+    # BG Car: https://image.flaticon.com/icons/png/512/1040/1040634.png
+    # Normal Blue: https://img-premium.flaticon.com/png/512/1048/1048314.png?token=exp=1623588933~hmac=974cdbfb2e58bb3c095e7ffbcb62fded
+    # Appraisal: https://img-premium.flaticon.com/png/512/4856/4856356.png?token=exp=1623589774~hmac=36396ae2b63ac6de8778a47610c89741
+    # Go: https://img-premium.flaticon.com/png/512/4856/4856364.png?token=exp=1623589856~hmac=f59c012b85676d66f381344906f0421c
+    # Wheel: https://image.flaticon.com/icons/png/512/3003/3003735.png
+    # Mario: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/c8a2987f-3e2e-4e4d-9aac-27d02b24bdd3/d6th2q4-8588e7b0-13bb-45e2-b881-51115b5d03a3.png
+
+    
+def header(url):
+     st.markdown(f'<b style="color:#384b8f;font-size:32px;">{url}</b>', unsafe_allow_html=True)
+
+    
 def main():
-    st.header("Used Cars **App**raisser")
+    
+    # Set page parameters
+    page_params()
+    
+    header("Used Cars APPraisser")
     st.write("""
     Thinking about buying a second-hand car in Spain? This application is based on a ML CatBoost algorithm. The model was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
     """)
@@ -111,8 +141,8 @@ def main():
     # Explaining model's ouput predictions using SHAP plotted values
     st.subheader('Parameters impact')
     st.write('''The color represents the parameters values (red is high, blue is low). SHAP plots show the distribution of the impacts each parameter has on the final price prediction.
-
-    This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, the higher the total number of kilometers of the car, the lower the price.
+    
+This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, the higher the total number of kilometers of the car, the lower the price.
     ''')
     img1 = Image.open('notebooks/fig/12_shap_model_distribution.png')
     img2 = Image.open('notebooks/fig/12_shap_model_barplot.png')
