@@ -276,7 +276,7 @@ pep8=1.7.1=py37_0
 pexpect=4.8.0=pyhd3eb1b0_3
 pickleshare=0.7.5=pyhd3eb1b0_1003
 pillow=8.1.2=py37he98fc37_0
-pip=21.0.1=py37h06a4308_0
+pip=21.1.2=py37h06a4308_0
 pixman=0.40.0=h7b6447c_0
 pkginfo=1.7.0=py37h06a4308_0
 pluggy=0.13.1=py37_0
@@ -360,10 +360,12 @@ seaborn=0.11.1=pyhd3eb1b0_0
 secretstorage=3.1.2=py37_1
 send2trash=1.5.0=pyhd3eb1b0_1
 setuptools=52.0.0=py37h06a4308_0
+shap=0.39.0=py37h219a48f_0
 simplegeneric=0.8.1=py37_2
 singledispatch=3.4.0.3=py_1001
 sip=4.19.8=py37hf484d3e_0
 six=1.15.0=py37h06a4308_0
+slicer=0.0.7=pyhd8ed1ab_0
 smmap=4.0.0=pyhd3eb1b0_0
 snappy=1.1.8=he6710b0_0
 sniffio=1.2.0=pypi_0
