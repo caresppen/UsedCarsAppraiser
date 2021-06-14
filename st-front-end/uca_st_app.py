@@ -159,14 +159,23 @@ def main():
     st.write('---')
 
     # Explaining model's ouput predictions using SHAP plotted values
+    st.write("## **Behind the scenes...**")
+    st.write("This section is dedicated to every individual curious about the machine learning model that powers this tool.")
     st.subheader(':bar_chart: Parameters impact')
-    st.write('''The color represents the parameters values (red is high, blue is low). SHAP plots show the distribution of the impacts each parameter has on the final price prediction.
+    st.write('''SHAP plots show the distribution of the impacts each parameter has on the final price prediction. The color represents the parameters values (red is high, blue is low).
     
 This explains for example that a low manufactured year, lowers the final predicted car price. What is more, cars with a high horse power, will result on a higher prection. Finally, it is possible to conclude that the higher the total number of kilometers of the car, the lower the price.
     ''')
-    img1 = Image.open('notebooks/fig/12_shap_model_distribution.png')
-    img2 = Image.open('notebooks/fig/12_shap_model_barplot.png')
-    st.image([img1, img2])
+    st.image(Image.open('notebooks/fig/12_shap_model_distribution.png'))
+    
+    st.subheader(':chart_with_upwards_trend: How different are predictions from actual values?')
+    st.write('''
+    Below we can find a scatter plot of the actual vs predicted values of the model. The diagonal line shows the perfect regressor. Therefore, the closer all of the predictions are to this line, the better the model.
+    
+    Having a deeper look into the values, we can conclude that the higher the price of the car, the more dispersed is the model. The number of second-hand cars with a value higher than **50,000 €** are scarce compared to more accesible cars. Therefore, we could expect a better performance of the model when predicting prices of non-luxury cars.
+    ''')
+    st.image(Image.open('notebooks/fig/12_model_pred_cb.png'))
+    
     st.write('---')
 
     # Final reference to the project
@@ -175,8 +184,10 @@ This explains for example that a low manufactured year, lowers the final predict
     For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
     Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
 
-    Created by Carlos Espejo Peña | [LinkedIn](https://www.linkedin.com/in/carlosespejopena/) | [GitHub](https://github.com/caresppen)
-    """)
+    Created by Carlos Espejo Peña
     
+    Contact: [![LinkedIn](https://drive.google.com/uc?export=view&id=1nx0u9GeUyYttqyju6Z1824UCqto6hXZv)](https://www.linkedin.com/in/carlosespejopena/) [![GitHub](https://drive.google.com/uc?export=view&id=17_77FAziJKdyZaRkjzlGFTKaPAKGdszl)](https://github.com/caresppen)
+    """)
+
 if __name__ == '__main__':
     main()
