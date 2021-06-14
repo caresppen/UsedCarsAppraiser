@@ -6,6 +6,8 @@ import sys
 sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
 from modules.fe_cars import frontend_preproc
 from modules.pickle_jar import decompress_pickle
+# scrapping
+from modules.car_scraping import cars_links_generator, scrape_used_cars_data
 
 def user_input_features(X):
     """
@@ -132,12 +134,26 @@ def main():
     
     # Sidebar
     st.sidebar.header(':gear: Specify Input Parameters')
-
-    # Write input features set
+    
+    # Input Sidebar link from coches.com
+    st.sidebar.write('#### Look for your car [![loupe](https://drive.google.com/uc?export=view&id=1vdDiJ8P5-rzTPmVnxyG1hdRWI5sr8Htk)](https://www.coches.com/coches-segunda-mano/coches-ocasion.htm)')
+    url = st.sidebar.text_input('Insert coches.com link', help='Once you have a link of a second-hand car from coches.com, paste it in the input box')
+    
+    cols = ['title', 'price', 'year', 'kms', 'city', 'year', 'doors', 'seats', 'power', 'color', 'co2_emiss', 'fuel_type', 'warranty', 'dealer',
+           'chassis', 'height', 'length', 'width', 'trunk_vol', 'max_speed', 'urban_cons', 'xtrurban_cons', 'mixed_cons', 'weight', 'tank_vol', 'acceleration']
+    
+    st.sidebar.write(url)
+#     car_data = scrape_used_cars_data(url)
+#     df_scrap = pd.DataFrame(car_data, columns=cols).drop(0)
+    
+#     st.sidebar.dataframe(car_data)
+    st.sidebar.write('---')
+    
+    # Write input features set on Sidebar
     df_input = user_input_features(X)
     df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
     st.subheader(':computer: User Inputs: Technical specs')
-    st.dataframe(df_input)
+    st.dataframe(df_input.style.set_properties(**{'background-color': 'white'}))
     
     # Applying feature engineering to the DataFrame before applying the model
     df = frontend_preproc(df, y)
@@ -152,8 +168,8 @@ def main():
     st.subheader(":crystal_ball: Prediction")
     prediction = cb_model.predict(df_pred)
     prediction = pd.DataFrame(prediction, columns=["Price prediction"])\
-                    .style.format('{:20,.2f}€')
-
+                    .style.format('{:20,.0f}€').set_properties(**{'background-color': 'white', 'font-weight': 'bold'})
+    
     st.write("The reasonable price for this second-hand car is:")
     st.dataframe(prediction)
     st.write('---')
@@ -172,7 +188,7 @@ This explains for example that a low manufactured year, lowers the final predict
     st.write('''
     Below we can find a scatter plot of the actual vs predicted values of the model. The diagonal line shows the perfect regressor. Therefore, the closer all of the predictions are to this line, the better the model.
     
-    Having a deeper look into the values, we can conclude that the higher the price of the car, the more dispersed is the model. The number of second-hand cars with a value higher than **50,000 €** are scarce compared to more accesible cars. Therefore, we could expect a better performance of the model when predicting prices of non-luxury cars.
+    Having a deeper look into the values, we can conclude that the higher the price of the car, the more dispersed is the model. The number of second-hand automobiles with a value higher than **50,000 €** are scarce compared to more accesible cars. Therefore, we could expect a better performance of the model when predicting prices of non-luxury brands.
     ''')
     st.image(Image.open('notebooks/fig/12_model_pred_cb.png'))
     
