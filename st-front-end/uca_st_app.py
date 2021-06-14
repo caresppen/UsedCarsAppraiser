@@ -7,7 +7,7 @@ sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
 from modules.fe_cars import frontend_preproc
 from modules.pickle_jar import decompress_pickle
 # scrapping
-from modules.car_scraping import cars_links_generator, scrape_used_cars_data
+# from modules.car_scraping import cars_links_generator, scrape_used_cars_data
 
 def user_input_features(X):
     """
