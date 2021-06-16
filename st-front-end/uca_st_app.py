@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 import sys
+from bs4 import BeautifulSoup
 sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
 from modules.fe_cars import frontend_preproc
 from modules.pickle_jar import decompress_pickle
