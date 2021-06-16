@@ -96,7 +96,7 @@ def scrape_used_cars_data(input_urls):
                         height, length, width, trunk_vol, max_speed, urban_cons, xtrurban_cons, mixed_cons, weight, tank_vol, acceleration]
         
             nested_list.append(car_info)
-            print(car_info)
+            # print(car_info)
         
         except Exception as e:
             print("Exception raised: {}".format(e))
@@ -160,7 +160,7 @@ def scrape_renting_cars_data(input_urls):
                         chassis, height, length, width, trunk_vol, max_speed, seats, urban_cons, xtrurban_cons, mixed_cons, weight, tank_vol, acceleration]
             
             nested_list.append(car_info)
-            print(car_info)
+            # print(car_info)
             
         except Exception as e:
             print("Exception raised: {}".format(e))

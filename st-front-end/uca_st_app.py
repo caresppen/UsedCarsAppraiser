@@ -6,39 +6,52 @@ import sys
 sys.path.append('/home/dsc/Dropbox/UsedCarsAppraiser')
 from modules.fe_cars import frontend_preproc
 from modules.pickle_jar import decompress_pickle
-# scrapping
-# from modules.car_scraping import cars_links_generator, scrape_used_cars_data
+from modules.car_link import used_car_input
+from modules.frontend_fmt import footer, html_header
 
-def user_input_features(X):
+def user_input_features(data, X):
     """
     Generates a DataFrame with all the inputs that the user did to make a prediction.
     New add-in: Read a coches.com input URL from the user
+    :data: input parameters of the car from the URL. If no URL inserted, the default model will be displayed.
+    :X: set of data with the model max & min to configure the car to be predicted.
     """
-    BRAND = st.sidebar.selectbox('Brand', np.sort(X.brand.unique()), index=int(np.where(np.sort(X.brand.unique())=='VOLVO')[0][0]), help='Choose car brand')
-    MODEL = st.sidebar.selectbox('Model', np.sort(X[X.brand == BRAND].model.unique()), index=int(len(X[X.brand == BRAND].model.unique())/2), help='Models available for the selected brand')
-    TYPE = st.sidebar.selectbox('Type', X.type.unique(), index=int(np.where(X.type.unique()=='medium')[0][0]))
-    CITY = st.sidebar.selectbox('City', X.city.unique(), index=int(np.where(X.city.unique()=='Sevilla')[0][0]))
-    GEARBOX = st.sidebar.selectbox('Gearbox', X.gearbox.unique(), index=int(np.where(X.gearbox.unique()=='Manual')[0][0]))
-    COLOR = st.sidebar.selectbox('Color', X.color.unique(), index=int(np.where(X.color.unique()=='WHITE')[0][0]))
-    FUEL = st.sidebar.selectbox('Fuel', X.fuel_type.unique(), index=int(np.where(X.fuel_type.unique()=='Gasoline')[0][0]))
+    if data.shape[0] > 1:
+        BRAND = st.sidebar.selectbox('Brand', np.sort(X.brand.unique()), index=int(np.where(np.sort(X.brand.unique())=='VOLVO')[0][0]), help='Choose car brand')
+        MODEL = st.sidebar.selectbox('Model', np.sort(X[X.brand == BRAND].model.unique()), index=int(len(X[X.brand == BRAND].model.unique())/2), help='Models available for the selected brand')
+        TYPE = st.sidebar.selectbox('Type', X.type.unique(), index=int(np.where(X.type.unique()=='medium')[0][0]))
+        CITY = st.sidebar.selectbox('City', X.city.unique(), index=int(np.where(X.city.unique()=='Sevilla')[0][0]))
+        GEARBOX = st.sidebar.selectbox('Gearbox', X.gearbox.unique(), index=int(np.where(X.gearbox.unique()=='Manual')[0][0]))
+        COLOR = st.sidebar.selectbox('Color', X.color.unique(), index=int(np.where(X.color.unique()=='WHITE')[0][0]))
+        FUEL = st.sidebar.selectbox('Fuel', X.fuel_type.unique(), index=int(np.where(X.fuel_type.unique()=='Gasoline')[0][0]))
+        CHASSIS = st.sidebar.selectbox('Chassis', X.chassis.unique(), index=int(np.where(X.chassis.unique()=='Sedan')[0][0]))
+    else:
+        BRAND = st.sidebar.selectbox('Brand', np.sort(data.brand.unique()), index=0, help='Choose car brand')
+        MODEL = st.sidebar.selectbox('Model', np.sort(data[data.brand == BRAND].model.unique()), index=0, help='Models available for the selected brand')
+        TYPE = st.sidebar.selectbox('Type', data.type.unique(), index=0)
+        CITY = st.sidebar.selectbox('City', data.city.unique(), index=0)
+        GEARBOX = st.sidebar.selectbox('Gearbox', data.gearbox.unique(), index=0)
+        COLOR = st.sidebar.selectbox('Color', data.color.unique(), index=0)
+        FUEL = st.sidebar.selectbox('Fuel', data.fuel_type.unique(), index=0)
+        CHASSIS = st.sidebar.selectbox('Chassis', data.chassis.unique(), index=0)
+    
     WARRANTY = st.sidebar.selectbox('Warranty', X.warranty.unique())
     DEALER = st.sidebar.selectbox('Dealer', X.dealer.unique())
-    CHASSIS = st.sidebar.selectbox('Chassis', X.chassis.unique(), index=int(np.where(X.chassis.unique()=='Sedan')[0][0]))
-    YEAR = st.sidebar.slider('Year', int(X.year.min()), int(X.year.max()), int(round(X.year.mean(),0)))
-    KMS = st.sidebar.number_input('Kms', 0, 500000, int(round(X.kms.mean(),0)), help='Select a value between 0 and 500,000')
-    DOORS = st.sidebar.slider('Doors', int(X.doors.min()), int(X.doors.max()), int(round(X.doors.mean(),0)))
-    SEATS = st.sidebar.slider('Seats', int(X.seats.min()), int(X.seats.max()), int(round(X.seats.mean(),0)))
-    POWER = st.sidebar.slider('Power', int(X.power.min()), int(X.power.max()), int(round(X.power.mean(),0)))
-    CO2 = st.sidebar.slider(u'CO\u2082 emissions', int(X.co2_emiss.min()), int(X.co2_emiss.max()), int(round(X.co2_emiss.mean(),0)))
-    HEIGHT = st.sidebar.slider('Height', int(X.height.min()), int(X.height.max()), int(round(X.height.mean(),0)))
-    LENGTH = st.sidebar.slider('Length', int(X.length.min()), int(X.length.max()), int(round(X.length.mean(),0)))
-    WIDTH = st.sidebar.slider('Width', int(X.width.min()), int(X.width.max()), int(round(X.width.mean(),0)))
-    TRUNK = st.sidebar.slider('Trunk volume', int(X.trunk_vol.min()), int(X.trunk_vol.max()), int(round(X.trunk_vol.mean(),0)))
-    SPEED = st.sidebar.slider('Max speed', int(X.max_speed.min()), int(X.max_speed.max()), int(round(X.max_speed.mean(),0)))
-    CONS = st.sidebar.slider('Mixed consumption', float(X.mixed_cons.min()), float(X.mixed_cons.max()), float(X.mixed_cons.mean()))
-    WEIGHT = st.sidebar.slider('Weight', int(X.weight.min()), int(X.weight.max()), int(round(X.weight.mean(),0)))
-    TANK = st.sidebar.slider('Tank volume', int(X.tank_vol.min()), int(X.tank_vol.max()), int(round(X.tank_vol.mean(),0)))
-    ACC = st.sidebar.slider('Acceleration', float(X.acc.min()), float(X.acc.max()), float(X.acc.mean()))
+    YEAR = st.sidebar.slider('Year', int(X.year.min()), int(X.year.max()), int(round(data.year.mean(),0)))
+    KMS = st.sidebar.number_input('Kms', 0, 500000, int(round(data.kms.mean(),0)), help='Select a value between 0 and 500,000')
+    DOORS = st.sidebar.slider('Doors', int(X.doors.min()), int(X.doors.max()), int(round(data.doors.mean(),0)))
+    SEATS = st.sidebar.slider('Seats', int(X.seats.min()), int(X.seats.max()), int(round(data.seats.mean(),0)))
+    POWER = st.sidebar.slider('Power', int(X.power.min()), int(X.power.max()), int(round(data.power.mean(),0)))
+    CO2 = st.sidebar.slider(u'CO\u2082 emissions', int(X.co2_emiss.min()), int(X.co2_emiss.max()), int(round(data.co2_emiss.mean(),0)))
+    HEIGHT = st.sidebar.slider('Height', int(X.height.min()), int(X.height.max()), int(round(data.height.mean(),0)))
+    LENGTH = st.sidebar.slider('Length', int(X.length.min()), int(X.length.max()), int(round(data.length.mean(),0)))
+    WIDTH = st.sidebar.slider('Width', int(X.width.min()), int(X.width.max()), int(round(data.width.mean(),0)))
+    TRUNK = st.sidebar.slider('Trunk volume', int(X.trunk_vol.min()), int(X.trunk_vol.max()), int(round(data.trunk_vol.mean(),0)))
+    SPEED = st.sidebar.slider('Max speed', int(X.max_speed.min()), int(X.max_speed.max()), int(round(data.max_speed.mean(),0)))
+    CONS = st.sidebar.slider('Mixed consumption', float(X.mixed_cons.min()), float(X.mixed_cons.max()), float(data.mixed_cons.mean()))
+    WEIGHT = st.sidebar.slider('Weight', int(X.weight.min()), int(X.weight.max()), int(round(data.weight.mean(),0)))
+    TANK = st.sidebar.slider('Tank volume', int(X.tank_vol.min()), int(X.tank_vol.max()), int(round(data.tank_vol.mean(),0)))
+    ACC = st.sidebar.slider('Acceleration', float(X.acc.min()), float(X.acc.max()), float(data.acc.mean()))
     
     data = {'brand': BRAND,
             'model': MODEL,
@@ -107,14 +120,6 @@ def page_params():
     # Wheel: https://image.flaticon.com/icons/png/512/3003/3003735.png
     # Mario: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/c8a2987f-3e2e-4e4d-9aac-27d02b24bdd3/d6th2q4-8588e7b0-13bb-45e2-b881-51115b5d03a3.png
 
-
-def html_header(url):
-     st.markdown(f'<b style="color:#439AD6;font-size:32px;">{url}</b>', unsafe_allow_html=True)
-
-
-def html_text(url):
-     st.markdown(f'<p style="background-color:#FFFFFF;color:#384B8F;">{url}</p>', unsafe_allow_html=True)
-
     
 def main():
     
@@ -138,19 +143,15 @@ def main():
     # Input Sidebar link from coches.com
     st.sidebar.write('#### Look for your car [![loupe](https://drive.google.com/uc?export=view&id=1vdDiJ8P5-rzTPmVnxyG1hdRWI5sr8Htk)](https://www.coches.com/coches-segunda-mano/coches-ocasion.htm)')
     url = st.sidebar.text_input('Insert coches.com link', help='Once you have a link of a second-hand car from coches.com, paste it in the input box')
-    
-    cols = ['title', 'price', 'year', 'kms', 'city', 'year', 'doors', 'seats', 'power', 'color', 'co2_emiss', 'fuel_type', 'warranty', 'dealer',
-           'chassis', 'height', 'length', 'width', 'trunk_vol', 'max_speed', 'urban_cons', 'xtrurban_cons', 'mixed_cons', 'weight', 'tank_vol', 'acceleration']
-    
-    st.sidebar.write(url)
-#     car_data = scrape_used_cars_data(url)
-#     df_scrap = pd.DataFrame(car_data, columns=cols).drop(0)
-    
-#     st.sidebar.dataframe(car_data)
     st.sidebar.write('---')
     
-    # Write input features set on Sidebar
-    df_input = user_input_features(X)
+    # Write input features set on Sidebar    
+    try:
+        i_car = used_car_input(url)
+        df_input = user_input_features(i_car, X)
+    except:
+        df_input = user_input_features(X, X)
+    
     df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
     st.subheader(':computer: User Inputs: Technical specs')
     st.dataframe(df_input.style.set_properties(**{'background-color': 'white'}))
@@ -199,11 +200,8 @@ This explains for example that a low manufactured year, lowers the final predict
     st.write("""
     For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
     Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
-
-    Created by Carlos Espejo Peña
-    
-    Contact: [![LinkedIn](https://drive.google.com/uc?export=view&id=1nx0u9GeUyYttqyju6Z1824UCqto6hXZv)](https://www.linkedin.com/in/carlosespejopena/) [![GitHub](https://drive.google.com/uc?export=view&id=17_77FAziJKdyZaRkjzlGFTKaPAKGdszl)](https://github.com/caresppen)
     """)
+    footer()
 
 if __name__ == '__main__':
     main()

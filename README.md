@@ -11,4 +11,5 @@ This car value appraiser aim is to use machine learning algorithms to find a fai
 
 ### Link to the app
 The app has been deployed using [heroku](https://www.heroku.com/platform). Follow the attached link to launch the app:
+
 https://used-cars-appraiser.herokuapp.com/

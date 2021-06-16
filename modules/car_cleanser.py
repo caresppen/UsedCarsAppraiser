@@ -62,18 +62,23 @@ def clean_my_car(df):
                             .replace('Automática', 'Automatic')
     
     # Creating a dictionary to translate the chassis
-    es_chassis = list(df.chassis.unique())
+    chassis_transl = {'Berlina': 'Sedan',
+                      'Todo Terreno': 'Offroad',
+                      'Pick-Up Doble Cabina': 'Pickup',
+                      'Chasis Doble Cabina': 'Van',
+                      'Stationwagon': 'Stationwagon',
+                      'Coupe': 'Coupe',
+                      'Furgon': 'Van',
+                      'Chasis': 'Chassis',
+                      'Monovolumen': 'Minivan',
+                      'Combi': 'Combi',
+                      'Convertible': 'Convertible',
+                      'Roadster': 'Roadster',
+                      'Pick-Up': 'Pickup',
+                      'Bus': 'Bus'
+                     }
 
-    try:
-        es_chassis.remove('Chasis')
-        es_chassis.append('Chasis') # Adding 'Chasis' by the end of the list
-    except:
-        print('No Chasis in the DataFrame')
-
-    en_chassis = ['Convertible', 'Coupe', 'Roadster', 'Targa', 'Sedan', 'Sedan', 'Minivan', 'Combi', 'Van', 'Van', 'Bus', 'Offroad', 'Pickup', 'Pickup', 'Stationwagon', 'Van', 'Chassis']
-    chassis_dict = dict(zip(es_chassis, en_chassis))
-
-    for es, en in chassis_dict.items():
+    for es, en in chassis_transl.items():
         df['chassis'] = df.chassis.str.replace(es, en)
     
     # Renaming columns
