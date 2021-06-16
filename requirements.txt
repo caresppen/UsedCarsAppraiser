@@ -5,7 +5,7 @@ pillow==8.1.2
 category_encoders==2.2.2
 scikit-learn==0.24.1
 catboost==0.25.1
-bs4==4.9.3
+beautifulsoup4==4.9.3
 lxml==4.6.2
 requests==2.25.1
 htbuilder==0.5.0
