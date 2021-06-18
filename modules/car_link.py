@@ -29,5 +29,6 @@ def used_car_input(url):
     df_scrap['type'] = 'other'
     
     df = df_scrap.drop(['title', 'urban_cons', 'xtrurban_cons', 'price'], axis=1)
+    y = df_scrap['price']
     
-    return df
+    return (df, y)

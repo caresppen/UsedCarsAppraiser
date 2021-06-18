@@ -102,7 +102,7 @@ def page_params():
     }
     </style>
     '''
-
+    
     st.markdown(page_bg_img, unsafe_allow_html=True)
     
     # White: https://biddown.com/wp-content/uploads/2020/03/4-41860_white-wallpaper-background-full-hd-background-white.jpg
@@ -141,16 +141,19 @@ def main():
     st.sidebar.header(':gear: Specify Input Parameters')
     
     # Input Sidebar link from coches.com
-    st.sidebar.write('#### Look for your car [![loupe](https://drive.google.com/uc?export=view&id=1vdDiJ8P5-rzTPmVnxyG1hdRWI5sr8Htk)](https://www.coches.com/coches-segunda-mano/coches-ocasion.htm)')
-    url = st.sidebar.text_input('Insert coches.com link', help='Once you have a link of a second-hand car from coches.com, paste it in the input box')
+    st.sidebar.write('#### Look for your car at coches.com [![loupe](https://drive.google.com/uc?export=view&id=1vdDiJ8P5-rzTPmVnxyG1hdRWI5sr8Htk)](https://www.coches.com/coches-segunda-mano/coches-ocasion.htm)')
+    url = st.sidebar.text_input('Insert a link to get a recommendation', help='Once you have a link of a second-hand car from coches.com, paste it in the input box. When no link is specified, a default car will appear.')
     st.sidebar.write('---')
     
-    # Write input features set on Sidebar    
+    # Write input features set on Sidebar
+    flag = 0    # flag to control the output dataframe for predicting the price
     try:
-        i_car = used_car_input(url)
-        df_input = user_input_features(i_car, X)
+        car_link, y_link = used_car_input(url)
+        df_input = user_input_features(car_link, X)
+        flag = 1
     except:
         df_input = user_input_features(X, X)
+        flag = 0
     
     df = pd.concat([df_input, X], axis=0).reset_index().drop('index', axis=1)
     st.subheader(':computer: User Inputs: Technical specs')
@@ -167,14 +170,49 @@ def main():
 
     # Apply model to predict price
     st.subheader(":crystal_ball: Prediction")
+    st.write('When a link is input, savings and a recommendation about the purchase will appear.')
     prediction = cb_model.predict(df_pred)
-    prediction = pd.DataFrame(prediction, columns=["Price prediction"])\
-                    .style.format('{:20,.0f}€').set_properties(**{'background-color': 'white', 'font-weight': 'bold'})
     
-    st.write("The reasonable price for this second-hand car is:")
-    st.dataframe(prediction)
-    st.write('---')
+    # Define final output table
+    def red_green_cond_fmt(number):
+        color = 'red' if number < 0 else 'green'
+        return f'color: {color}; background-color: white'
+    
+    if flag == 1:
+        df_pred = pd.DataFrame(prediction, columns=["Price prediction"])
+        df_pred['Price on website'] = y_link.iloc[0]
+        df_pred['Savings'] = df_pred['Price prediction'] - df_pred['Price on website']
+        df_pred['Recommended purchase?'] = 'Yes' if df_pred['Savings'].iloc[0]>=0 else 'No'
+        sv_color = '#C81C3C' if df_pred['Savings'].iloc[0]<=0 else 'green'
+        
+        for col in ['Price prediction', 'Price on website', 'Savings']:
+            df_pred[col] = df_pred[col].apply(lambda x: '{:20,.0f}€'.format(x))
 
+        df_pred = df_pred.T
+        df_pred.columns = ['Result']
+
+        df_pred = df_pred.style\
+                         .set_properties(subset = pd.IndexSlice['Price prediction', :],
+                                         **{'background-color': 'white', 'font-weight': 'bold'})\
+                         .set_properties(subset = pd.IndexSlice['Savings', :],
+                                         **{'color': sv_color})\
+                         .set_properties(subset = pd.IndexSlice[['Price on website', 'Savings', 'Recommended purchase?'], :],
+                                         **{'background-color': 'white'})\
+                         .set_table_styles([{'selector': 'th',
+                                             'props': [('column-width', '80px')]
+                                            }
+                                           ]
+                                          )
+        
+    else:
+        df_pred = pd.DataFrame(prediction, columns=["Price prediction"]).T
+        df_pred.columns = ['Result']
+        df_pred = df_pred.style.format('{:20,.0f}€').set_properties(**{'background-color': 'white', 'font-weight': 'bold'})
+    
+    # DataFrame prediction output
+    st.dataframe(df_pred)
+    st.write('---')
+    
     # Explaining model's ouput predictions using SHAP plotted values
     st.write("## **Behind the scenes...**")
     st.write("This section is dedicated to every individual curious about the machine learning model that powers this tool.")
@@ -194,13 +232,15 @@ This explains for example that a low manufactured year, lowers the final predict
     st.image(Image.open('notebooks/fig/12_model_pred_cb.png'))
     
     st.write('---')
-
+    
     # Final reference to the project
     st.subheader(':link: References')
     st.write("""
     For further details regarding this project, please refer to its [repo on GitHub](https://github.com/caresppen/UsedCarsAppraiser).
     Here, you will be able to find all the scripts and notebooks used in dataset creation, analysis, visualizations and modeling. You can also download the models used in this app and use them for any other aims.
     """)
+    
+    # Setting app footer
     footer()
 
 if __name__ == '__main__':
