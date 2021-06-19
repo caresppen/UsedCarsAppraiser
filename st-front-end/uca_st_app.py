@@ -88,7 +88,7 @@ def user_input_features(data, X):
 def page_params():
     
     PAGE_CONFIG = {"page_title": "Carlyst",
-                   "page_icon": "https://drive.google.com/uc?export=view&id=1X_17y1BRDHoeM3mxqlFxsOu2e5rDnVWK",
+                   "page_icon": "https://drive.google.com/uc?export=view&id=1PkZx6L1SkT-DGRjsv-SOHHiF2vEL8yOW",
                    "layout": "centered",
                    "initial_sidebar_state": "auto"}
     
