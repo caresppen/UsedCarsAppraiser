@@ -87,8 +87,8 @@ def user_input_features(data, X):
 
 def page_params():
     
-    PAGE_CONFIG = {"page_title": "UCApp",
-                   "page_icon": "https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png",
+    PAGE_CONFIG = {"page_title": "Carlyst",
+                   "page_icon": "https://drive.google.com/uc?export=view&id=1X_17y1BRDHoeM3mxqlFxsOu2e5rDnVWK",
                    "layout": "centered",
                    "initial_sidebar_state": "auto"}
     
@@ -104,29 +104,18 @@ def page_params():
     '''
     
     st.markdown(page_bg_img, unsafe_allow_html=True)
-    
-    # White: https://biddown.com/wp-content/uploads/2020/03/4-41860_white-wallpaper-background-full-hd-background-white.jpg
-    # Google Drive: https://drive.google.com/uc?export=view&id=1ZlLnr5nLLTGBYA7xWpE3picPEIsMTWCE
-    
-    # Icon: https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png
-    # Bugatti: https://pngimg.com/uploads/bugatti/bugatti_PNG31.png
-    # AUDI: https://image.flaticon.com/icons/png/512/741/741460.png
-    # BMW: https://img-premium.flaticon.com/png/512/741/741403.png?token=exp=1623588793~hmac=189aba02502ff104d954d153cb7e675a
-    # Normal Red: https://img-premium.flaticon.com/png/512/3085/3085330.png?token=exp=1623588897~hmac=4c4646b5fc8ae43fbfdb648781b25741
-    # BG Car: https://image.flaticon.com/icons/png/512/1040/1040634.png
-    # Normal Blue: https://img-premium.flaticon.com/png/512/1048/1048314.png?token=exp=1623588933~hmac=974cdbfb2e58bb3c095e7ffbcb62fded
-    # Appraisal: https://img-premium.flaticon.com/png/512/4856/4856356.png?token=exp=1623589774~hmac=36396ae2b63ac6de8778a47610c89741
-    # Go: https://img-premium.flaticon.com/png/512/4856/4856364.png?token=exp=1623589856~hmac=f59c012b85676d66f381344906f0421c
-    # Wheel: https://image.flaticon.com/icons/png/512/3003/3003735.png
-    # Mario: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/c8a2987f-3e2e-4e4d-9aac-27d02b24bdd3/d6th2q4-8588e7b0-13bb-45e2-b881-51115b5d03a3.png
 
+    # Google Drive: https://drive.google.com/uc?export=view&id=1R4eNDfMno8ToYNYRTYW6JppCjEP-wpf9
+    # BGWhite: https://biddown.com/wp-content/uploads/2020/03/4-41860_white-wallpaper-background-full-hd-background-white.jpg
+    # Icon: https://www.pngkey.com/png/full/366-3662307_to-get-started-please-fill-out-your-information.png
     
 def main():
     
     # Set page parameters
     page_params()
     
-    html_header("Used Cars APPraisser")
+    # Title logo
+    st.image("https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap", width=685)
     st.write("""
     Thinking about buying a second-hand car in Spain? This application will help you find a fair price for your desired car. The model, which is based on a ML CatBoost algorithm, was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
     """)
