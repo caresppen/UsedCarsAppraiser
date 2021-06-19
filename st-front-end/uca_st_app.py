@@ -115,7 +115,7 @@ def main():
     page_params()
     
     # Title logo
-    st.image("https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap", width=685)
+    st.image("https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap", width=None)  #685
     st.write("""
     Thinking about buying a second-hand car in Spain? This application will help you find a fair price for your desired car. The model, which is based on a ML CatBoost algorithm, was trained using a dataset of 55,326 real second-hand cars from [coches.com](https://www.coches.com/). It can predict prices of used cars up to 100,000€ in the Spanish market.
     """)
