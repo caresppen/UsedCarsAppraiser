@@ -1,6 +1,5 @@
-![Carlyst](https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap)
-
 # Carlyst: Used Cars Appraiser
+![Carlyst](https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap)
 Master Thesis. Master in Data Science at KSchool (2020-2021).
 
 **Author**: [Carlos Espejo Peña](https://www.linkedin.com/in/carlosespejopena/)
