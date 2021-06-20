@@ -1,7 +1,9 @@
-# Car Value Appraiser
+![Carlyst](https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap)
+
+# Carlyst: Used Cars Appraiser
 Master Thesis. Master in Data Science at KSchool (2020-2021).
 
-Carlos Espejo Peña
+**Author**: [Carlos Espejo Peña](https://www.linkedin.com/in/carlosespejopena/)
 
 ### Introduction to the problem
 Nowadays, there is an uncertainty on the price that should be paid for a second hand vehicle. There are several classified ad pages that promote car prices, but how many of them are you telling which ones have a fair price?
