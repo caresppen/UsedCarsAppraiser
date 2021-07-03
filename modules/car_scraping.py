@@ -11,7 +11,7 @@ import re
 
 def webpages_generator(base_url, init_pages, n_pages):
     '''
-    Generates al list with all the links
+    Generates a list with all the links
     * base_url = <str> common string on the url for each page
     * init_pages = <int> number of the first page available in the web
     * n_pages = <int> number of the last page available in the web
