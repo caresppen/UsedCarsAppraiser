@@ -13,7 +13,7 @@ def clean_my_car(df):
     * df = DataFrame to be cleaned
     '''
     
-    # Extracting numbers from all the Qunatitative columns
+    # Extracting numbers from all the Quantitative columns
     df['price'] = df.price.str.replace('.', '', regex=False).str.replace('€', '')
     df.loc[df.year.str.len() > 4, 'year'] = df.year.str[-4:]
     df['kms'] = df.kms.str.replace('.', '', regex=False).str.replace('km', '').str.replace('NUEVO', '0')
