@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run st-front-end/uca_st_app.py
+web: sh setup.sh && streamlit run st-front-end/carlyst_st_app.py
