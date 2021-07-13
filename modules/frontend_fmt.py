@@ -79,17 +79,3 @@ def footer():
         link("https://github.com/caresppen", image('https://drive.google.com/uc?export=view&id=17_77FAziJKdyZaRkjzlGFTKaPAKGdszl')),
     ]
     layout(*myargs)
-
-    
-def more_children_or_more_pets_background(row):    
-
-    highlight = 'background-color: lightcoral;'
-    default = ''
-
-    # must return one string per cell in this row
-    if row['num_children'] > row['num_pets']:
-        return [highlight, default]
-    elif row['num_pets'] > row['num_children']:
-        return [default, highlight]
-    else:
-        return [default, default]
