@@ -1,6 +1,7 @@
 # Carlyst: Used Cars Appraiser
 ![Carlyst](https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap)
 Master Thesis. Master in Data Science at KSchool (2020-2021).
+
 **Author**: [Carlos Espejo Peña](https://www.linkedin.com/in/carlosespejopena/)
 
 This presentation act as a guidance for Carlyst project. It contains the structure of the repository, an overall concept of the objective of this project and a guide on how to use this [app](https://carlyst.herokuapp.com/).
@@ -10,9 +11,9 @@ It holds the following elements, which are summarized in this [directory tree](h
 ##### Folders
 * [data](https://github.com/caresppen/UsedCarsAppraiser/tree/main/data): `csv` files generated along this project.
 * [modules](https://github.com/caresppen/UsedCarsAppraiser/tree/main/modules): python scripts packaged to simplify tasks on notebooks.
-* [notebooks](https://github.com/caresppen/UsedCarsAppraiser/tree/main/notebooks): jupyter notebooks that elaborate every detail for each machine learning process of this project. It contains saved figures of main generated plots and stored models using bz2.
-* [st-front-end](https://github.com/caresppen/UsedCarsAppraiser/tree/main/st-front-end): Carlyst python application based on streamlit.
-* [txt_guidelines](https://github.com/caresppen/UsedCarsAppraiser/tree/main/txt_guidelines): general `txt` scripts to produce web scraping, a directory tree and YAML file.
+* [notebooks](https://github.com/caresppen/UsedCarsAppraiser/tree/main/notebooks): jupyter notebooks that elaborate every detail for each machine learning process of this project. It contains saved figures of main generated plots and stored models using `bz2`.
+* [st-front-end](https://github.com/caresppen/UsedCarsAppraiser/tree/main/st-front-end): Carlyst python application based on `streamlit`.
+* [txt_guidelines](https://github.com/caresppen/UsedCarsAppraiser/tree/main/txt_guidelines): general `txt` scripts to produce web scraping, a directory tree and `YAML` file.
 
 ##### Main Files
 * [Memory](https://github.com/caresppen/UsedCarsAppraiser/blob/main/MT_Carlyst_UsedCarsAppraisser.pdf): detailed master thesis which explains every step to create this ML solution.
