@@ -1,6 +1,7 @@
 # Carlyst: Used Cars Appraiser
 ![Carlyst](https://drive.google.com/uc?export=view&id=1cf6kuyI7QMg5VDDLlsbfL-Yrpi-OF_ap)
 Master Thesis. Master in Data Science at KSchool (2020-2021).
+
 **Author**: [Carlos Espejo Peña](https://www.linkedin.com/in/carlosespejopena/)
 
 This presentation act as a guidance for Carlyst project. It contains the structure of the repository, an overall concept of the objective of this project and a guide on how to use this [app](https://carlyst.herokuapp.com/).
@@ -52,14 +53,16 @@ The model, which is based on a ML CatBoost algorithm, was trained using a datase
 
 ![Model Evaluation](https://drive.google.com/uc?export=view&id=16Jffb8FT4FUm1uemgV5jvOtg6Y-xRiuG)
 
-##### Random Forest
+#### Random Forest
 * [11a_Hyperparameter_Tuning-RF.ipynb](https://github.com/caresppen/UsedCarsAppraiser/blob/main/notebooks/11a_Hyperparameter_Tuning-RF.ipynb): **Do not run this notebook** (can take up to 6 hours). Through applying a Random and Grid Search CV, finds the best parameters for the Random Forest Regressor. 
 * [12a_Model_Builder-RF.ipynb](https://github.com/caresppen/UsedCarsAppraiser/blob/main/notebooks/12a_Model_Builder-RF.ipynb): Evaluation of the model, residual plot and model persistence process to it in a compressed pickle.
 
-##### CatBoost
+#### CatBoost
 * [11b_Hyperparameter_Tuning-CB.ipynb](https://github.com/caresppen/UsedCarsAppraiser/blob/main/notebooks/11b_Hyperparameter_Tuning-CB.ipynb): **Do not run this notebook** (can take up to 2 hours). Through applying a Random and Grid Search CV, finds the best configuration for the CatBoost Regressor. This resulted to be the best performer and most optimal model.
 * [12b_Model_Builder-CB.ipynb](https://github.com/caresppen/UsedCarsAppraiser/blob/main/notebooks/12b_Model_Builder-CB.ipynb): Final model evaluation using $$R^2 score$$ and SHAP values. Generates a plot with Actual vs Predicted values. Saves the model in a compressed `bz2` file to be used in the streamlit app.
+
 ![CatBoost Model](https://drive.google.com/uc?export=view&id=1XAj6hzbKqa8tD_lBsaH0jhLQy1hY4FLb)
+
 _The image above explains the behaviour of the machine learning model. In example, it will consider that a low manufactured year, contributes to a lower final predicted car price._
 
 ## Link to the app
