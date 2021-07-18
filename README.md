@@ -6,6 +6,20 @@ Master Thesis. Master in Data Science at KSchool (2020-2021).
 
 This presentation act as a guidance for Carlyst project. It contains the structure of the repository, an overall concept of the objective of this project and a guide on how to use this [app](https://carlyst.herokuapp.com/).
 
+## Contents
+1. [Repository Structure](https://github.com/caresppen/UsedCarsAppraiser#repository-structure)
+2. [Introduction to the problem](https://github.com/caresppen/UsedCarsAppraiser#introduction-to-the-problem)
+3. [Objective](https://github.com/caresppen/UsedCarsAppraiser#objective)
+4. [Notebooks](https://github.com/caresppen/UsedCarsAppraiser#notebooks)
+    4.1. [Data Extraction and Cleansing](https://github.com/caresppen/UsedCarsAppraiser#data-extraction-and-cleansing)
+    4.2. [Exploratory Data Analysis (EDA)](https://github.com/caresppen/UsedCarsAppraiser#exploratory-data-analysis-eda)
+    4.3. [Methodology: Feature Engineering and Data Modelling](https://github.com/caresppen/UsedCarsAppraiser#methodology-feature-engineering-and-data-modelling)
+5. [Carlyst: Streamlit app](https://github.com/caresppen/UsedCarsAppraiser#carlyst-streamlit-app)
+    5.1. [Running it on local](https://github.com/caresppen/UsedCarsAppraiser#running-it-on-local)
+    5.2. [Launching the online app](https://github.com/caresppen/UsedCarsAppraiser#launching-the-online-app)
+    5.3. [Navigation](https://github.com/caresppen/UsedCarsAppraiser#navigation)
+6. [Requirements](https://github.com/caresppen/UsedCarsAppraiser#requirements)
+
 ## Repository structure
 It holds the following elements, which are summarized in this [directory tree](https://htmlpreview.github.io/?https://github.com/caresppen/UsedCarsAppraiser/blob/main/tree.html):
 ##### Folders
