@@ -65,6 +65,47 @@ The model, which is based on a ML CatBoost algorithm, was trained using a datase
 
 _The image above explains the behaviour of the machine learning model. In example, it will consider that a low manufactured year, contributes to a lower final predicted car price._
 
-## Link to the app
-The app has been deployed using [heroku](https://www.heroku.com/platform). Follow the attached link to launch the app:
-https://carlyst.herokuapp.com/
+## Carlyst: Streamlit app
+Behind the scenes, a CatBoost ML model is running to provide a real-time price prediction of a second-hand car. The source code of this web based application is placed in the **st-front-end** folder: [carlyst_st_app.py](https://github.com/caresppen/UsedCarsAppraiser/blob/main/st-front-end/carlyst_st_app.py)
+
+### Running it on local
+Once on the [root folder](https://github.com/caresppen/UsedCarsAppraiser), execute from command line:
+```python
+streamlit run st-front-end/carlyst_st_app.py
+```
+
+### Launching the online app
+Carlyst has been deployed using [heroku](https://www.heroku.com/platform). This platform provides a free worker to build and execute the application on demand (- [Build log example](https://codeshare.io/vwwE6n)).
+
+[Click here](https://carlyst.herokuapp.com/) to launch the app.
+
+### Navigation
+Interact with this app by modifying the input parameters using sliders, text and selection boxes. Each configuration will provide a new price prediction:
+
+![Carlyst Change Params](https://drive.google.com/uc?export=view&id=1bcU05LauWxRoXQSD9aLSRjeT01K9qbCB)
+
+To get an automatic prediction, based on a specific second-hand car in the market, provide a url from [coches.com](https://www.coches.com/coches-segunda-mano/coches-ocasion.htm). When a link is input, savings and a recommendation about the puchase appear:
+
+![Carlyst Link](https://drive.google.com/uc?export=view&id=1mrsl6NDxDj9D_nlZdPmUFgj9nK6ZwVxf)
+
+After the link is read, parameters can be modified to predict a new price based on the new configuration.
+
+## Requirements
+1. Install [python 3.7.10](https://www.python.org/downloads/release/python-3710/).
+2. Install [anaconda](https://docs.anaconda.com/anaconda/install/index.html) distribution on OS.
+3. Clone this repository:
+    ```shell
+    git clone https://github.com/caresppen/UsedCarsAppraiser
+    ```
+4. Change `cwd` to the [root folder](https://github.com/caresppen/UsedCarsAppraiser) of this project.
+    ```shell
+    cd UsedCarsAppraiser/
+    ```
+5. Create, activate, and update an environment using the provided `yml` file: [env-config.yml](https://github.com/caresppen/UsedCarsAppraiser/blob/main/env-config.yml). For further information, consult [conda user guide](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). This will enable the environment to run every notebook without any constraints:
+    ```python
+    conda create --name myenv
+    conda activate myenv
+    conda env update --file env-config.yml --prune
+    ```
+6. Deployment to Heroku. Place these config files on the root folder: [Procfile](https://github.com/caresppen/UsedCarsAppraiser/blob/main/Procfile), [runtime.txt](https://github.com/caresppen/UsedCarsAppraiser/blob/main/runtime.txt), [setup.sh](https://github.com/caresppen/UsedCarsAppraiser/blob/main/setup.sh), [requirements.txt](https://github.com/caresppen/UsedCarsAppraiser/blob/main/requirements.txt)
+7. `CB_model` uploaded to [**Releases**](https://github.com/caresppen/UsedCarsAppraiser/releases/tag/cb_model_v1). In case it is needed to be directly implemented to any project.
